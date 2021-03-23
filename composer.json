@@ -1,0 +1,21 @@
+{
+    "name": "vincent/rlb",
+    "require": {
+        "symfony/var-dumper": "^3.4",
+        "bramus/router": "^1.5",
+        "twig/twig": "^1.42",
+        "cocur/slugify": "^3.2"
+    },
+    "authors": [
+        {
+            "name": "Vincent",
+            "email": "vincent.loron@supinternet.fr"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\":"App/",
+            "Framework\\":"Framework/"
+        }
+    }
+}
