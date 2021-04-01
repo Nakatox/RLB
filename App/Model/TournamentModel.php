@@ -8,6 +8,33 @@ use \PDO;
 
 class TournamentModel extends Model{
 
+public function tournaments()
+    {
+        $db = $this->getDb();
+        $query = $db->prepare('SELECT * FROM tournament');
+        $query->execute( [
+           
+
+    ]);
+        $tournaments = $query->fetchAll();
+        return $tournaments;
+    }
+
+
+
+
+    public function classements()
+    {
+        $db = $this->getDb();
+        $query = $db->prepare('SELECT * FROM classement');
+        $query->execute( [
+           
+
+    ]);
+        $classements = $query->fetchAll();
+        return $classements;
+    }
+
     public function getTournament(){
         $db = $this->getDb();
         $stmt = $db->query('SELECT * FROM tournament');
@@ -51,5 +78,9 @@ class TournamentModel extends Model{
             'tournament_id'=>$tournament_id
         ]);
     }
-    
+
 }
+
+?>
+
+    
