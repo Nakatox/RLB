@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+ .nameTeams{
+     display: none;
+ }
+</style>
+<body>
+    <h1>Create a tournament :</h1>
+    <form action="/admin/tournament/create" method="POST" class="form">
+      <p>Choose a name for your tournament</p><input type="text" placeholder="name" name="name" class="nameinput">
+      <br>
+      <p>Choose Teams :</p>
+      <p>How many teams :</p>
+
+    <div class="equipe">
+                                     
+    </div>
+        <input type="submit" value="create tournament">
+    </form>
+
+
+
+
+    <form action="" class="nb_teams">
+        <select class="nb">
+            <option value="2">2 teams</option>
+            <option value="4">4 teams</option>
+            <option value="6">6 teams</option>
+            <option value="8">8 teams</option>
+        </select>
+        <input type="submit" value="total team">
+      </form> 
+      
+
+    {% for value in teams %}
+        <div class="nameTeams">{{value.name}}</div>
+    {%endfor%}
+</body>
+<script>
+    let form = document.querySelector('.form')
+    let form_nb = document.querySelector('.nb_teams')
+    let nameTeams = document.querySelectorAll('.nameTeams')
+    let div = document.querySelector('.equipe')
+    let nameinput = document.querySelector('.nameinput')
+    console.log(nameTeams.lenght);
+    // for (let y = 0; y < nameTeams.length; y++) {
+    //     console.log(nameTeams[y].textContent);
+    // }
+
+    form_nb.addEventListener('submit', function(e){
+        e.preventDefault()
+        div.innerHTML = ""
+        for (let i = 0; i < form_nb[0].value; i++) { 
+            let select = document.createElement('select')
+            for (let x = 0; x < nameTeams.length; x++) {
+                console.log("oui");
+                let option = document.createElement('option')
+                option.value = nameTeams[x].textContent
+                option.innerText = nameTeams[x].textContent
+                select.appendChild(option)
+                div.appendChild(select)
+                select.name = "teamChosen[]"
+            }
+            
+        }
+    })
+</script>
+</html>
