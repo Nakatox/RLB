@@ -26,6 +26,7 @@ class RegisterController extends Controller {
 
             if (!$user) {
                 $user = $userModel->addUser($_POST['firstname'], $_POST['lastname'], $_POST['email'], $_POST['password']);
+                header('Location: /login');
             }
 
             if ($user) {

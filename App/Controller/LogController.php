@@ -40,6 +40,7 @@ class LogController extends Controller{
                 $_SESSION['firstname'] = $_POST['firstname'];
                 var_dump($_SESSION['firstname']);
                 echo "<h1>" . "Congratulation, you are now login " . $_SESSION['firstname'] . " " . $_POST["lastname"] . "</h1>";
+                header('Location: /admin/tournament/create');
             } else  if (!$user) {
                 echo "Your account doesn't exist";
             }
