@@ -19,19 +19,19 @@ class LogController extends Controller{
             $userModel = new UserModel();
             $user = $userModel->checkUser($_POST['firstname'], $_POST['lastname'], $_POST['email'], $_POST['password'] );
 
-            if (empty($_POST['firstname'])) {
+            if ($_POST['firstname'] == "") {
                 echo " You didn't put your username !" . "<br>";
             }
 
-            if (empty($_POST['lastname'])) {
+            if ($_POST['lastname'] == "") {
                 echo " You didn't put your lastname !" . "<br>";
             }
 
-            if (empty($_POST['email'])) {
+            if ($_POST['email'] == "") {
                 echo " You didn't put your email !" . "<br>";
             }
 
-            if (empty($_POST['password'])) {
+            if ($_POST['password'] == "") {
                 echo " You didn't put your password !" . "<br>";
             }
 
