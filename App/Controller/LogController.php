@@ -14,17 +14,16 @@ class LogController extends Controller{
 
         $this->renderTemplate('login.html');
 
-        if (!empty($_POST['firstname']) && !empty($_POST['lastname']) && !empty($_POST['email']) && !empty($_POST['password'])) 
+        if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['email']) && isset($_POST['password'])) 
         {
-            session_start();
             $userModel = new UserModel();
-            $user = $userModel->getUser($_POST['firstname'], $_POST['lastname'], $_POST['email'], $_POST['password']);
-            dump($user);
+            $user = $userModel->getAllUser($_POST['firstname'], $_POST['lastname'], $_POST['email'], $_POST['password'] );
+            var_dump($user);
 
             if ($user)
             {
-                echo "nice";
                 $_SESSION['firstname'] = $_POST['firstname'];
+                var_dump($_SESSION['firstname']);
                 echo "<h1>" . $_SESSION['firstname'] . "</h1>";
             } 
         } else {

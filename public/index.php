@@ -4,6 +4,8 @@ require_once __DIR__.'/../vendor/autoload.php';
 
 use Bramus\Router\Router;
 
+session_start();
+
 $router = new Router();
 
 $router->get('/admin', '\App\Controller\AdminController@User');
