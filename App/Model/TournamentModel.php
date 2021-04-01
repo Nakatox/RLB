@@ -43,4 +43,13 @@ class TournamentModel extends Model{
             'id_tournament'=>$id_tournament
         ]);
     }
+    public function addTournamentHasTeam($tournament_id,$team_id){
+        $db = $this->getDb();
+        $stmt = $db->prepare('INSERT INTO `tournaments_has_team`(`team_id`, `tournaments_id`) VALUES (:team_id,:tournament_id)');
+        $stmt->execute([
+            'team_id'=>$team_id,
+            'tournament_id'=>$tournament_id
+        ]);
+    }
+    
 }
