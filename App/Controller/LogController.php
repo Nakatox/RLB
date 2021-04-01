@@ -17,7 +17,7 @@ class LogController extends Controller{
         if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['email']) && isset($_POST['password'])) 
         {
             $userModel = new UserModel();
-            $user = $userModel->getAllUser($_POST['firstname'], $_POST['lastname'], $_POST['email'], $_POST['password'] );
+            $user = $userModel->checkUser($_POST['firstname'], $_POST['lastname'], $_POST['email'], $_POST['password'] );
 
             if (empty($_POST['firstname'])) {
                 echo " You didn't put your username !" . "<br>";

@@ -14,16 +14,28 @@ class UserModel extends Model{
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getAllUser(string $firstname, string $lastname, $email, string $password)
+    public function checkUser(string $firstname, string $lastname, $email, string $password)
     {
         $db = $this->getDb();
         $requete = $db->prepare('SELECT * FROM `user` WHERE first_name = :firstname AND last_name = :lastname AND email = :email AND password = :password');
         $requete->execute([
-            ':firstname' => $firstname, 
-            ':lastname' => $lastname, 
-            ':email' => $email, 
-            ':password' => $password
+            'firstname' => $firstname, 
+            'lastname' => $lastname, 
+            'email' => $email, 
+            'password' => $password
         ]);
         return $requete->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function addUser(string $firstname, string $lastname, $email, string $password)
+    {
+        $db = $this->getDb();
+        $stmt = $db->prepare('INSERT INTO `user`(`first_name`, `last_name`, `email`, `password`) VALUES (:first_name,:last_name,:email,:password)');
+        $stmt->execute([
+            'first_name'=>$firstname,
+            'last_name'=>$lastname,
+            'email'=>$email,
+            'password'=>$password
+        ]);
     }
 }
