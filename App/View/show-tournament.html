@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .id{
+        visibility: hidden;
+    }
+</style>
+<body>
+   <p>{{dataTournament.name}}</p> 
+   <p class="id">{{dataTournament.id}}</p>
+   <div class="classement">
+   </div>
+
+</body>
+<script>
+window.addEventListener('DOMContentLoaded',function(){
+    let id = document.querySelector('.id').textContent
+    let divClassement =document.querySelector('.classement')
+    let fieldset = document.createElement('fieldset')
+
+
+    fetch(`/tournament/classement/${id}`)
+    .then(response=>response.json())
+    .then((data)=>{
+
+        console.log(data)
+        for(const value of data){
+            let pteam = document.createElement('p')
+            let pscore = document.createElement('p')
+            let pstatus = document.createElement('p')
+
+            pteam.innerHTML = value.team
+            pscore.innerHTML = value.score
+            pstatus.innerHTML = value.status
+
+            fieldset.appendChild(pteam)
+            fieldset.appendChild(pscore)
+            fieldset.appendChild(pstatus)
+            divClassement.appendChild(fieldset)
+        }
+    })
+})
+</script>
+</html>

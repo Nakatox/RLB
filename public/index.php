@@ -23,6 +23,12 @@ $router->post('/admin/tournament/create', '\App\Controller\TournamentController@
 $router->get('/tournament/list', '\App\Controller\TournamentController@showTournaments');
 $router->get('/classement/list', '\App\Controller\TournamentController@showClassements');
 
+//tournoi
+$router->get('/tournament/classement/{id}', '\App\Controller\TournamentController@showClassement');
+$router->get('/tournament/{id}/admin', '\App\Controller\TournamentController@tournamentByIdAdmin');
+$router->get('/tournament/{id}', '\App\Controller\TournamentController@showTournamentById');
+
+
 
 
 $router->run();

@@ -49,34 +49,38 @@ class TournamentController extends Controller{
                 'status'=>'in_progress',
                 'teams'=>[]
             ];
-            foreach ($teamChoose as $key => $value) {
-                $data['teams'] += [
-                    $key =>[
-                        'team'=>$value,
-                        'score'=>0,
-                        'status'=>'in_progress',
-                    ]
-                ];
-            }
-            //on l'encode pour pouvoir le mettre dans la BDD
-            $json = json_encode($data);
-            //et ensuite on devra decode pour pouvoir utiliser/modifier pendant/apres le tournois
-            // $jsondecode = json_decode($json);    
-            // $jsondecode->status = "finish";         <----Exemples
-            // dump($jsondecode) ;
 
-
-            //
             $tournament->insertTournament(1,$name,$nb_stage);
             $id_tournament = $tournament->getTournamentId(1,$name,$nb_stage); //Ici les id sont a 1 par defaut car pas encore de Session
-            $tournament->insertClassement($id_tournament[0]['id'],$json);
+            foreach ($teamChoose as $key => $value) {
+                $tournament->insertClassement($id_tournament[0]['id'], $value, 0, "in-progress");
+            }
             foreach ($teamChoose as $key => $value) {
                 $teamid = $team->getTeamByName($teamChoose[$key]);
                 $tournament->addTournamentHasTeam($id_tournament[0]['id'],$teamid[0]['id']);
             }
+            
+            
+
+           
         }
         $this->renderTemplate('admin-createTournament.html',[
             'teams'=>$teams,
         ]);
     }   
+    public function showTournamentById($id){
+        $tournament = new TournamentModel();
+        $dataTournament = $tournament->TournamentById($id);
+        $this->renderTemplate('show-tournament.html',[
+            'dataTournament'=>$dataTournament[0],
+        ]);
+    }
+    public function showClassement($id){
+        $classement =new TournamentModel();
+        $data = $classement->classementById($id);
+        $json = json_encode($data);
+
+        header('Content-type: application/json');
+        echo $json;
+    }
 }
