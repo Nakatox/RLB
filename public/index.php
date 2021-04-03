@@ -27,6 +27,11 @@ $router->post('/admin/tournament/create', '\App\Controller\TournamentController@
 $router->get('/tournament/list', '\App\Controller\TournamentController@showTournaments');
 $router->get('/classement/list', '\App\Controller\TournamentController@showClassements');
 
+//team
+$router->get('/team/select/{id}', '\App\Controller\TeamController@showTeamById');
+$router->get('/teams/all', '\App\Controller\TeamController@showTeams');
+
+
 //tournoi
 $router->get('/tournament/classement/{id}', '\App\Controller\TournamentController@showClassement');
 $router->get('/tournament/{id}/admin', '\App\Controller\TournamentController@tournamentByIdAdmin');

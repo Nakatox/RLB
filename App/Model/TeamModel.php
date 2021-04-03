@@ -17,7 +17,15 @@ class TeamModel extends Model{
         $db = $this->getDb();
         $stmt = $db->prepare('SELECT id FROM team WHERE name = :name');
         $stmt->execute([
-            ':name'=>$name,
+            'name'=>$name,
+        ]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function getTeamById($id){
+        $db = $this->getDb();
+        $stmt = $db->prepare('SELECT * FROM team WHERE id = :id');
+        $stmt->execute([
+            'id'=>$id,
         ]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
