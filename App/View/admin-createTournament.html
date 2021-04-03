@@ -12,6 +12,8 @@
  }
 </style>
 <body>
+    {% include 'header.html'%}
+
     <h1>Create a tournament :</h1>
     <form action="/admin/tournament/create" method="POST" class="form">
       <p>Choose a name for your tournament</p><input type="text" placeholder="name" name="name" class="nameinput">

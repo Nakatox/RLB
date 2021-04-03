@@ -5,6 +5,10 @@ require_once __DIR__.'/../vendor/autoload.php';
 use Bramus\Router\Router;
 
 session_start();
+if(empty($_SESSION['id'])){
+    $_SESSION['id'] = "";
+}
+
 
 $router = new Router();
 
