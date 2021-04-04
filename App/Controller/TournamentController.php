@@ -25,24 +25,6 @@ class TournamentController extends Controller{
     public function showClassements() {
         $tournamentModel = new TournamentModel();
         $classements = $tournamentModel->classements();
-        $tournaments = []; 
-        foreach ($classements as $classement) {
-            
-            $teams = [];
-
-            $decodedJson = json_decode($classement['data'], true);
-            if (isset($decodedJson)) {
-                foreach ($decodedJson["teams"] as $teamJson) {
-                    $team = new Team($teamJson["team"], $teamJson["score"]);
-                    array_push($teams, $team);
-                }
-                $tournament = new Tournament($decodedJson["status"], $teams, $classement['tournament_id']);
-                array_push($tournaments, $tournament);
-            }
-        }
-       
-        var_dump($tournaments[0]);
-
 
 
         $this->renderTemplate('classement-list.html.twig', [
