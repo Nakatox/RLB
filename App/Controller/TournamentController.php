@@ -26,9 +26,19 @@ class TournamentController extends Controller{
         $tournamentModel = new TournamentModel();
         $classements = $tournamentModel->classements();
 
+        $filtredClassements = [];
+
+        foreach($classements as $classement) {
+            if (isset($filtredClassements[$classement["tournament_id"]])) {
+                array_push($filtredClassements[$classement["tournament_id"]], $classement);
+            } else {
+                $filtredClassements[$classement["tournament_id"]] = [];
+                array_push($filtredClassements[$classement["tournament_id"]], $classement);
+            }
+        }
 
         $this->renderTemplate('classement-list.html.twig', [
-            'classements' => $classements
+            'filtredClassements' => $filtredClassements
             
             ]);
             
