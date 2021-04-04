@@ -7,7 +7,8 @@ use App\Model\TournamentModel;
 
 use App\Model\TeamModel;
 use Framework\Controller;
-
+require('Team.php');
+require('Tournament.php');
 
 class TournamentController extends Controller{
 
@@ -24,12 +25,16 @@ class TournamentController extends Controller{
     public function showClassements() {
         $tournamentModel = new TournamentModel();
         $classements = $tournamentModel->classements();
+
+
         $this->renderTemplate('classement-list.html.twig', [
             'classements' => $classements
             
             ]);
-            return;
+            
+            
     }
+   
 
     public function createTournament(){
         $tournament = new TournamentModel();

@@ -20,7 +20,10 @@
   <thead>
     <tr>
     
-      <th scope="col">data</th>
+     <th scope="col">TEAM</th>
+       <th scope="col">SCORE</th>
+        <th scope="col">STATUS</th>
+        
       
       
     </tr>
@@ -28,7 +31,9 @@
   <tbody>
    {% for classement in classements %}
     <tr>
-      <th scope="row">  {{ classement.data }}</th>
+      <th scope="row">  {{ classement.team }}</th>
+       <th scope="row">  {{ classement.score }}</th>
+        <th scope="row">  {{ classement.status }}</th>
       
    
       
