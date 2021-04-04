@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/CSS/show-team.css">
+    <link rel="stylesheet" href="/assets/CSS/reset.css">
+
+    <title>Document</title>
+</head>
+<body>
+    {% include 'header.html'%}
+    <div class="container">
+        <div>
+            <p class="nameTeam">{{team.name}}</p>
+        </div>
+        <div class="infos">
+            <p>{{team.nb_victory}} win</p>
+            <p>{{team.nb_likes}} Likes</p>
+        </div>
+        <p class="player">Player in this team : {{team.members}}</p>
+    </div>
+</body>
+</html>

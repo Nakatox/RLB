@@ -10,7 +10,9 @@
     <title>Document</title>
 </head>
 <body>
-   <h1>CLASSEMENT :</h1>
+    {% include 'header.html'%}
+
+    <div>classement List:</div>
     
 
 
@@ -29,9 +31,9 @@
   <tbody>
    {% for classement in classements %}
     <tr>
-      <th scope="row">  {{ classement.status }}</th>
+      <th scope="row">  {{ classement.team }}</th>
        <th scope="row">  {{ classement.score }}</th>
-        <th scope="row">  {{ classement.team }}</th>
+        <th scope="row">  {{ classement.status }}</th>
       
    
       

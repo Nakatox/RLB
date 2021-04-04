@@ -10,6 +10,8 @@
     <title>Document</title>
 </head>
 <body>
+    {% include 'header.html'%}
+
     <div>Tournament List:</div>
     
 
@@ -26,9 +28,9 @@
   <tbody>
    {% for tournament in tournaments %}
     <tr>
-      <th scope="row">  {{ tournament.name }}</th>
+      <th scope="row"> <a href="/tournament/{{tournament.id}}"> {{ tournament.name }}</a></th>
       
-      <td>{{ tournament.nb_stage }} </td>
+      <td>  {{ tournament.nb_stage }} </td>
       
       {# <td><a href="/event/{{event.id}}">See event</a></td> #}
      

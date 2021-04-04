@@ -62,11 +62,13 @@ public function tournaments()
         ]);
     }
      
-    public function insertClassement($id_tournament,$data){
+    public function insertClassement($id_tournament,$name,$score,$status){
         $db = $this->getDb();
-        $stmt = $db->prepare('INSERT INTO `classement`(`data`, `tournament_id`) VALUES (:data,:id_tournament)');
+        $stmt = $db->prepare('INSERT INTO `classement`(`team`,`score`,`status`,`tournament_id`) VALUES (:team,:score,:status,:id_tournament)');
         $stmt->execute([
-            'data'=>$data,
+            'team'=>$name,
+            'score'=>$score,
+            'status'=>$status,
             'id_tournament'=>$id_tournament
         ]);
     }
@@ -77,6 +79,26 @@ public function tournaments()
             'team_id'=>$team_id,
             'tournament_id'=>$tournament_id
         ]);
+    }
+
+    public function tournamentById($id){
+        $db = $this->getDb();
+        $stmt = $db->prepare('SELECT * FROM tournament WHERE id = :id');
+        $stmt->execute([
+            'id'=>$id,
+        ]);
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $data;
+    }
+
+    public function classementById($id){
+        $db = $this->getDb();
+        $stmt = $db->prepare('SELECT * FROM classement WHERE tournament_id = :id ORDER BY score');
+        $stmt->execute([
+            'id'=>$id,
+        ]);
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $data;
     }
 
 }
