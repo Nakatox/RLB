@@ -26,7 +26,7 @@ public function tournaments()
     public function classements()
     {
         $db = $this->getDb();
-        $query = $db->prepare('SELECT * FROM classement');
+        $query = $db->prepare('SELECT * FROM classement ORDER BY score DESC');
         $query->execute( [
            
 
