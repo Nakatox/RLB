@@ -1,0 +1,31 @@
+.form{
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+}
+
+.textInput{
+    font-size: 25px;
+    font-weight: bold;
+    margin: 20px 0;
+}
+.textInput>span{
+    opacity: 0.4;
+    font-size: 20px;
+    font-weight: normal;
+}
+.input{
+    width: 20vw;
+    font-size: 25px;
+    border-radius: 5px;
+    border: solid 2px rgb(68, 68, 246);
+    font-size: 20px;
+    padding: 5px 10px;
+}
+.submit{
+    border-radius: 5px;
+    border: solid 2px rgb(68, 68, 246);
+    font-size: 25px;
+    width: 120px;
+    margin: 10px;
+}

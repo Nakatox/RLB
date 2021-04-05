@@ -4,18 +4,27 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/CSS/register.css">
+    <link rel="stylesheet" href="/assets/CSS/reset.css">
     <title>Document</title>
 </head>
 <body>
     {% include 'header.html'%}
-
+<div class="container">
     <h1>Register</h1>
-    <form action="/register" method="POST">
-        <input type="name" name="firstname" placeholder="firstname">
-        <input type="name" name="lastname" placeholder="lastname">
-        <input type="email" name="email" placeholder="email">
-        <input type="password" name="password" placeholder="password">
-        <input type="submit" value="register">
+    <form action="/register" method="POST" class="form">
+        <p class="textInput">Firstname :</p>
+        <input type="name" name="firstname" placeholder="firstname" class="input">
+        <p class="textInput">Lastname :</p>
+        <input type="name" name="lastname" placeholder="lastname" class="input">
+        <p class="textInput">Email :</p>
+        <input type="email" name="email" placeholder="email" class="input">
+        <p class="textInput">Your password :  <span>(must be minimum 8 character and contains a special character, on upercase and one number)</span></p>
+        <input type="password" name="password" placeholder="password" class="input"> 
+        <p class="textInput">Confirm password :</p>
+        <input type="password" name="confirmPassword" placeholder="Confirm password" class="input">
+        <input type="submit" value="Register" class="submit">
     </form>
+</div>
 </body>
 </html>

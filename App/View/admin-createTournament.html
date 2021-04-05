@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/CSS/create-tournament.css">
+    <link rel="stylesheet" href="/assets/CSS/reset.css">
+
     <title>Document</title>
 </head>
 <style>
@@ -13,37 +16,34 @@
 </style>
 <body>
     {% include 'header.html'%}
+    <div class="container">
+        <h1 class="title">Create a tournament :</h1>
+        <form action="/admin/tournament/create" method="POST" class="form">
+            <p class="chooseTitle">Choose a name for your tournament</p><input type="text" placeholder="name" name="name" class="nameinput">
+            <br>
+            <p class="choose chooseBold">Choose Teams :</p>
+            
+            <div class="equipe">
+                
+            </div>
+            <p class="choose">How many teams :</p>
+                <input type="submit" value="Create tournament" class="create">
+        </form>
 
-    <h1>Create a tournament :</h1>
-    <form action="/admin/tournament/create" method="POST" class="form">
-      <p>Choose a name for your tournament</p><input type="text" placeholder="name" name="name" class="nameinput">
-      <br>
-      <p>Choose Teams :</p>
-      <p>How many teams :</p>
-
-    <div class="equipe">
-                                     
+        <form action="" class="nb_teams">
+            <select class="nb">
+                <option value="2">2 teams</option>
+                <option value="4">4 teams</option>
+                <option value="6">6 teams</option>
+                <option value="8">8 teams</option>
+            </select>
+            <input type="submit" value="Valid" class="create2">
+        </form> 
+        
+        {% for value in teams %}
+            <div class="nameTeams">{{value.name}}</div>
+        {%endfor%}
     </div>
-        <input type="submit" value="create tournament">
-    </form>
-
-
-
-
-    <form action="" class="nb_teams">
-        <select class="nb">
-            <option value="2">2 teams</option>
-            <option value="4">4 teams</option>
-            <option value="6">6 teams</option>
-            <option value="8">8 teams</option>
-        </select>
-        <input type="submit" value="total team">
-      </form> 
-      
-
-    {% for value in teams %}
-        <div class="nameTeams">{{value.name}}</div>
-    {%endfor%}
 </body>
 <script>
     let form = document.querySelector('.form')
@@ -61,8 +61,8 @@
         div.innerHTML = ""
         for (let i = 0; i < form_nb[0].value; i++) { 
             let select = document.createElement('select')
+            select.classList.add('teamChoose')
             for (let x = 0; x < nameTeams.length; x++) {
-                console.log("oui");
                 let option = document.createElement('option')
                 option.value = nameTeams[x].textContent
                 option.innerText = nameTeams[x].textContent

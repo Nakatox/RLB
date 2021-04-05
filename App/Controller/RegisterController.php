@@ -13,26 +13,17 @@ class RegisterController extends Controller {
     public function register() {
 
         $this->renderTemplate('register.html');
-
-        if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['email']) && isset($_POST['password'])) {
+        $pattern = '/^(?=.*[!@#$%^&*-])(?=.*[0-9])(?=.*[A-Z]).{8,20}$/';
+        $pattern2 ='/[-0-9a-zA-Z.+_]+@[-0-9a-zA-Z.+_]+.[a-zA-Z]{2,4}/';
+        if (isset($_POST['firstname']) && strlen($_POST['firstname'])>2 && strlen($_POST['firstname']) < 20 && isset($_POST['lastname'])&& strlen($_POST['lastname'])>2 && strlen($_POST['lastname']) < 20 && isset($_POST['email']) && preg_match($pattern2,$_POST['email']) && isset($_POST['password'])&& strlen($_POST['password'])>3&& strlen($_POST['password'])<20 && preg_match($pattern, $_POST['password'])) {
 
             $userModel = new UserModel();
             $user = $userModel->checkUser($_POST['firstname'], $_POST['lastname'], $_POST['email'], $_POST['password']);
-
-            if (empty($_POST['firstname']) && empty($_POST['lastname']) && empty($_POST['email']) && empty($_POST['password']) ) {
-                echo " You didn't put yours informations !" . "<br>";
-                return;
-            }
 
             if (!$user) {
                 $user = $userModel->addUser($_POST['firstname'], $_POST['lastname'], $_POST['email'], $_POST['password']);
                 header('Location: /login');
             }
-
-            if ($user) {
-                echo "This account already exist";
-            }
         }
-        
     }
 }

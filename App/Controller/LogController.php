@@ -14,35 +14,15 @@ class LogController extends Controller{
 
         $this->renderTemplate('login.html');
 
-        if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['email']) && isset($_POST['password'])) 
+        if (isset($_POST['email']) && strlen($_POST['email'])>3 && isset($_POST['password']) && strlen($_POST['password'])>3 && strlen($_POST['password'])<20) 
         {
             $userModel = new UserModel();
-            $user = $userModel->checkUser($_POST['firstname'], $_POST['lastname'], $_POST['email'], $_POST['password'] );
-
-            if ($_POST['firstname'] == "") {
-                echo " You didn't put your username !" . "<br>";
-            }
-
-            if ($_POST['lastname'] == "") {
-                echo " You didn't put your lastname !" . "<br>";
-            }
-
-            if ($_POST['email'] == "") {
-                echo " You didn't put your email !" . "<br>";
-            }
-
-            if ($_POST['password'] == "") {
-                echo " You didn't put your password !" . "<br>";
-            }
+            $user = $userModel->checkUser($_POST['email'], $_POST['password'] );
 
             if ($user)
             {
-                $_SESSION['firstname'] = $_POST['firstname'];
-                var_dump($_SESSION['firstname']);
-                echo "<h1>" . "Congratulation, you are now login " . $_SESSION['firstname'] . " " . $_POST["lastname"] . "</h1>";
+                $_SESSION['id'] = $user[0]["id"];
                 header('Location: /admin/tournament/create');
-            } else  if (!$user) {
-                echo "Your account doesn't exist";
             }
         }
     }
