@@ -32,14 +32,14 @@ $router->get('/team/select/{id}', '\App\Controller\TeamController@showTeamById')
 $router->get('/teams/all', '\App\Controller\TeamController@showTeams');
 $router->get('/teams/all/like', '\App\Controller\TeamController@showSortLikes');
 $router->get('/teams/all/win', '\App\Controller\TeamController@showSortWins');
-
+$router->get('/create/teams', '\App\Controller\TeamController@showcreateTeamsForm');
+$router->post('/create/teams', '\App\Controller\TeamController@showcreateTeamsForm');
 
 //tournoi
 $router->get('/tournament/classement/{id}', '\App\Controller\TournamentController@showClassement');
 $router->get('/tournament/{id}/admin', '\App\Controller\TournamentController@tournamentByIdAdmin');
 $router->get('/tournament/{id}', '\App\Controller\TournamentController@showTournamentById');
-$router->get('/create/teams', '\App\Controller\TeamController@showcreateTeamsForm');
-$router->post('/create/teams', '\App\Controller\TeamController@showcreateTeamsForm');
+
 
 
 
