@@ -98,4 +98,6 @@ class TournamentController extends Controller{
         header('Content-type: application/json');
         echo $json;
     }
+
+   
 }
