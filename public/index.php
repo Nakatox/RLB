@@ -30,6 +30,10 @@ $router->get('/admin/tournament/edit/{id}', '\App\Controller\TournamentControlle
 $router->post('/admin/tournament/edit/{id}', '\App\Controller\TournamentController@editTournamentById');
 $router->get('/admin/tournament/list', '\App\Controller\TournamentController@showTournamentByUser');
 
+//déroulement d'un tournois coté admin
+$router->get('/admin/tournament/{id}/manage', '\App\Controller\TournamentController@manageTournament');
+
+
 // liste de tournois
 $router->get('/tournament/list', '\App\Controller\TournamentController@showTournaments');
 $router->get('/classement/list', '\App\Controller\TournamentController@showClassements');

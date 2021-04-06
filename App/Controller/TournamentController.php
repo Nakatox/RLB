@@ -143,5 +143,15 @@ class TournamentController extends Controller{
         }
     }
 
+    public function manageTournament($id){
+        if($_SESSION['id']!=""){
+            
+
+            $this->renderTemplate('admin-manage-tournament.html');
+        }else{
+            http_response_code(404);
+            die();
+        }
+    }
    
 }
