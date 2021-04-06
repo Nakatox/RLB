@@ -10,7 +10,16 @@ use Framework\Controller;
 
 
 class TeamController extends Controller{
-
+    private $teamModel;
+    
+    
+    public function  __construct() 
+    {
+        parent::__construct();
+        $this->teamModel = new TeamModel();
+        
+        
+    }
 
     public function showTeamById($id){
         $teamModel = new TeamModel();
@@ -26,5 +35,39 @@ class TeamController extends Controller{
         $this->renderTemplate('show-all-teams.html',[
             'teams'=>$teams,
         ]);
+    }
+
+    public function showSortLikes(){
+        $teamModel = new TeamModel();
+        $teams = $teamModel->sortLike();
+        $this->renderTemplate('show-all-teams.html',[
+            'teams'=>$teams,
+        ]);
+    }
+
+    public function showSortWins(){
+        $teamModel = new TeamModel();
+        $teams = $teamModel->sortWin();
+        $this->renderTemplate('show-all-teams.html',[
+            'teams'=>$teams,
+        ]);
+    }
+
+    public function showcreateTeamsForm()
+    {
+        
+        if (isset($_POST['name'])  && isset($_POST['members'] ) && isset($_POST['nb_victory'] ) && isset($_POST['nb_likes']) ) {
+            $this->teamModel->createTeams($_POST['name'], $_POST['members'], $_POST['nb_victory'], $_POST['nb_likes']);
+            
+        }
+        
+        $this->renderTemplate('create-teams.html.twig', [
+            
+            ]);
+            return;
+            
+            
+            
+            
     }
 }

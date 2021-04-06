@@ -142,4 +142,6 @@ class TournamentController extends Controller{
             die();
         }
     }
+
+   
 }
