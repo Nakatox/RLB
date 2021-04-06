@@ -30,6 +30,8 @@ $router->get('/classement/list', '\App\Controller\TournamentController@showClass
 //team
 $router->get('/team/select/{id}', '\App\Controller\TeamController@showTeamById');
 $router->get('/teams/all', '\App\Controller\TeamController@showTeams');
+$router->get('/teams/all/like', '\App\Controller\TeamController@showSortLikes');
+$router->get('/teams/all/win', '\App\Controller\TeamController@showSortWins');
 
 
 //tournoi

@@ -27,4 +27,20 @@ class TeamController extends Controller{
             'teams'=>$teams,
         ]);
     }
+
+    public function showSortLikes(){
+        $teamModel = new TeamModel();
+        $teams = $teamModel->sortLike();
+        $this->renderTemplate('show-all-teams.html',[
+            'teams'=>$teams,
+        ]);
+    }
+
+    public function showSortWins(){
+        $teamModel = new TeamModel();
+        $teams = $teamModel->sortWin();
+        $this->renderTemplate('show-all-teams.html',[
+            'teams'=>$teams,
+        ]);
+    }
 }
