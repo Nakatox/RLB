@@ -56,8 +56,8 @@ class TeamController extends Controller{
     public function showcreateTeamsForm()
     {
         
-        if (isset($_POST['name'])  && isset($_POST['members'] ) && isset($_POST['nb_victory'] ) && isset($_POST['nb_likes']) ) {
-            $this->teamModel->createTeams($_POST['name'], $_POST['members'], $_POST['nb_victory'], $_POST['nb_likes']);
+        if (isset($_POST['name'])  && isset($_POST['members'] ) ) {
+            $this->teamModel->createTeams($_POST['name'], $_POST['members']);
             
         }
         

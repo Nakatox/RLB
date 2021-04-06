@@ -40,17 +40,13 @@ class TeamModel extends Model{
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function createTeams($name, $members, $nb_victory, $nb_likes)
+    public function createTeams($name, $members)
     {
         $db = $this->getDb();
-        $query = $db->prepare('INSERT INTO team (`name`, `members`, `nb_victory`, `nb_likes`) VALUES (:name, :members, :nb_victory, :nb_likes)');
+        $query = $db->prepare('INSERT INTO team (`name`, `members`) VALUES (:name, :members)');
         $query->execute( [
             'name' => $name,
-	    	'members' => $members,
-	    	'nb_victory' => $nb_victory,
-            'nb_likes' => $nb_likes,
-           
-
+	    	'members' => $members
     ]);
   
     }
