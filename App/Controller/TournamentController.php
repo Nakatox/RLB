@@ -15,10 +15,11 @@ class TournamentController extends Controller{
     public function showTournaments() {
         $tournamentModel = new TournamentModel();
         $tournaments = $tournamentModel->tournaments();
+        $date = Date('Y-m-d');
         $this->renderTemplate('tournament-list.html.twig', [
-            'tournaments' => $tournaments
-            
-            ]);
+            'tournaments' => $tournaments,
+            'date'=>$date
+        ]);
             return;
     }
 
@@ -86,8 +87,10 @@ class TournamentController extends Controller{
     public function showTournamentById($id){
         $tournament = new TournamentModel();
         $dataTournament = $tournament->TournamentById($id);
+        $date = Date('Y-m-d');
         $this->renderTemplate('show-tournament.html',[
             'dataTournament'=>$dataTournament[0],
+            'date'=>$date
         ]);
     }
     public function showClassement($id){
@@ -97,5 +100,46 @@ class TournamentController extends Controller{
 
         header('Content-type: application/json');
         echo $json;
+    }
+    public function showTournamentByUser(){
+        if($_SESSION['id']!=""){
+            $tournamentsModel = new TournamentModel();
+            $tournaments = $tournamentsModel->getTournamentByIdUser($_SESSION['id']);
+            $this->renderTemplate('admin-tournament-list.html',[
+                'tournaments'=>$tournaments,
+            ]);
+        }else{
+            http_response_code(404);
+            die();
+        }
+    }
+    public function editTournamentById($id){
+        if($_SESSION['id']!=""){
+            $tournamentsModel = new TournamentModel();
+            if(!empty($_POST["name"]) && strlen($_POST['name']) > 4 && strlen($_POST['name']) < 100 && !empty($_POST["date"])){
+                $tournaments = $tournamentsModel->editTournamentById($id, $_POST["name"],$_POST["date"] );
+                header('Location:/admin/tournament/list');
+            }
+
+            $dataTournament = $tournamentsModel->TournamentById($id);
+            $this->renderTemplate('admin-tournament-edit.html',[
+                'tournaments'=>$dataTournament[0],
+            ]);
+        }else{
+            http_response_code(404);
+            die();
+        }
+    }
+    public function deleteTournamentById($id){
+        if($_SESSION['id']!=""){
+            $tournamentsModel = new TournamentModel();
+            $tournamentsModel->deleteTournamentHasTeam($id);
+            $tournamentsModel->deleteClassement($id);
+            $tournamentsModel->deleteTournamentById($id);
+            header('Location:/admin/tournament/list');
+        }else{
+            http_response_code(404);
+            die();
+        }
     }
 }

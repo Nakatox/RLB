@@ -16,6 +16,11 @@
            <a href="/login"><li>Login</li></a> 
            <a href="/register"><li>Register</li></a> 
            <a href="/classement/list"><li>List Classement</li></a> 
+        {% if session['id'] != "" %}
+           <a href="/disconnect"><li>Disconnect</li></a> 
+            <a href="/admin/tournament/create"><li>Create tournament</li></a> 
+            <a href="/admin/tournament/list"><li>Manage your tournaments</li></a> 
+        {% endif %}
         </ul>
     </section>
 </body>

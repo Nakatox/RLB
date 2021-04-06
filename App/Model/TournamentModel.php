@@ -20,9 +20,6 @@ public function tournaments()
         return $tournaments;
     }
 
-
-
-
     public function classements()
     {
         $db = $this->getDb();
@@ -51,6 +48,31 @@ public function tournaments()
         ]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function getTournamentByIdUser($user_id){
+        $db = $this->getDb();
+        $stmt = $db->prepare('SELECT * FROM tournament WHERE user_id = :user_id ');
+        $stmt->execute([
+            'user_id'=>$user_id,
+        ]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function deleteTournamentById($id){
+        $db = $this->getDb();
+        $stmt = $db->prepare('DELETE FROM `tournament` WHERE id = :id');
+        $stmt->execute([
+            'id'=>$id,
+        ]);
+    }
+    public function editTournamentById($id, $name, $date){
+        $db = $this->getDb();
+        $stmt = $db->prepare('UPDATE `tournament` SET `name`=:name,`date`=:date WHERE id = :id');
+        $stmt->execute([
+            'id'=>$id,
+            'name'=>$name,
+            'date'=>$date,
+        ]);
+    }
+
 
     public function insertTournament($userid,$name,$nb_stage){
         $db = $this->getDb();
@@ -72,11 +94,25 @@ public function tournaments()
             'id_tournament'=>$id_tournament
         ]);
     }
+    public function deleteClassement($id){
+        $db = $this->getDb();
+        $stmt = $db->prepare('DELETE FROM `classement` WHERE tournament_id=:id');
+        $stmt->execute([
+            'id'=>$id,
+        ]);
+    }
     public function addTournamentHasTeam($tournament_id,$team_id){
         $db = $this->getDb();
         $stmt = $db->prepare('INSERT INTO `tournaments_has_team`(`team_id`, `tournaments_id`) VALUES (:team_id,:tournament_id)');
         $stmt->execute([
             'team_id'=>$team_id,
+            'tournament_id'=>$tournament_id
+        ]);
+    }
+    public function deleteTournamentHasTeam($tournament_id){
+        $db = $this->getDb();
+        $stmt = $db->prepare('DELETE FROM `tournaments_has_team` WHERE tournaments_id=:tournament_id');
+        $stmt->execute([
             'tournament_id'=>$tournament_id
         ]);
     }

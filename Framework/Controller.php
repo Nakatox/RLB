@@ -13,6 +13,7 @@ class Controller
     {
         $loader = new FilesystemLoader('../App/View');
         $this->templating = new Environment($loader);
+        $this->templating->addGlobal("session", $_SESSION);
     }
 
     protected function renderTemplate(string $templateName, array $templateParameters = [])

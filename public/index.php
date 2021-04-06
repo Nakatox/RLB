@@ -18,10 +18,17 @@ $router->get('/login', '\App\Controller\LogController@Log');
 $router->post('/login', '\App\Controller\LogController@Log');
 $router->get('/register', '\App\Controller\RegisterController@register');
 $router->post('/register', '\App\Controller\RegisterController@register');
+$router->get('/disconnect', '\App\Controller\RegisterController@disconnect');
 
 // création de tournois coté admin
 $router->get('/admin/tournament/create', '\App\Controller\TournamentController@createTournament');
 $router->post('/admin/tournament/create', '\App\Controller\TournamentController@createTournament');
+
+//edition de tournois coté admin
+$router->get('/admin/tournament/delete/{id}', '\App\Controller\TournamentController@deleteTournamentById');
+$router->get('/admin/tournament/edit/{id}', '\App\Controller\TournamentController@editTournamentById');
+$router->post('/admin/tournament/edit/{id}', '\App\Controller\TournamentController@editTournamentById');
+$router->get('/admin/tournament/list', '\App\Controller\TournamentController@showTournamentByUser');
 
 // liste de tournois
 $router->get('/tournament/list', '\App\Controller\TournamentController@showTournaments');
