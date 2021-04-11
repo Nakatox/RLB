@@ -38,7 +38,6 @@ public function tournaments()
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     public function getTournamentId($user_id,$name,$nb_stage){
-        dump($nb_stage);
         $db = $this->getDb();
         $stmt = $db->prepare('SELECT * FROM tournament WHERE user_id = :user_id AND name = :name AND nb_stage = :nb_stage');
         $stmt->execute([

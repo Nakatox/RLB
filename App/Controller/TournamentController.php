@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Model\StageModel;
 use Cocur\Slugify\Slugify;
 use App\Model\TournamentModel;
 
@@ -52,12 +53,14 @@ class TournamentController extends Controller{
             $tournament = new TournamentModel();
             $team = new TeamModel();
             $teams = $team->getTeam();
+            $stage = new StageModel();
         
             if(!empty($_POST["name"]) && strlen($_POST['name']) > 4 && strlen($_POST['name']) < 100 && !empty($_POST["teamChosen"])){
                 //les équipes font du 1v1 donc ondivise le nombre de participant par deux pour avoir le tot d'étapes 
                 $nb_stage = count($_POST["teamChosen"])/2;
                 $name = $_POST["name"];
                 $teamChoose = $_POST["teamChosen"];
+                $allteamsId = [];
 
 
                 //On defini ici toutes les infos des equipe et du tournois en cours ou fini
@@ -74,6 +77,20 @@ class TournamentController extends Controller{
                 foreach ($teamChoose as $key => $value) {
                     $teamid = $team->getTeamByName($teamChoose[$key]);
                     $tournament->addTournamentHasTeam($id_tournament[0]['id'],$teamid[0]['id']);
+                    array_push($allteamsId,$teamid[0]['id']);
+                }
+                $stage->insertStage($id_tournament[0]['id'],1);
+
+                    $id_stage = $stage->getStageByTournament($id_tournament[0]['id'],1);
+                    $teamsIdChoose = [];
+                for ($i=0; $i < $nb_stage; $i++) { 
+                    $stage->insertRound($id_stage[0]['id'],$allteamsId[0],$allteamsId[1],$i);
+                    for ($y=0; $y < 2; $y++) { 
+                        // array_push($teamsIdChoose,$teamid);
+                        unset($allteamsId[$y]);
+                    }
+                    array_values($allteamsId);
+                    dump($allteamsId);
                 }
             }
             $this->renderTemplate('admin-createTournament.html',[
