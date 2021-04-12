@@ -10,7 +10,7 @@ use Framework\Controller;
 
 class LogController extends Controller{
 
-    public function Log(){
+    public function Log():void{
 
         $this->renderTemplate('login.html');
 

@@ -9,7 +9,7 @@ use \PDO;
 class StageModel extends Model{
 
 
-    public function insertRound($stage_id,$team_1,$team_2,$round_number){
+    public function insertRound(int $stage_id,int $team_1,int $team_2,int $round_number){
         $db = $this->getDb();
         $query = $db->prepare('INSERT INTO `round`(`stage_id`, `team_1`, `team_2`, `round_number`) VALUES (:stage_id,:team_1,:team_2,:round_number)');
         $query->execute( [
@@ -19,7 +19,7 @@ class StageModel extends Model{
 	    	'round_number' => $round_number
         ]);
     }
-    public function insertStage($tournament_id,$stage_number){
+    public function insertStage(int $tournament_id, int $stage_number){
         $db = $this->getDb();
         $query = $db->prepare('INSERT INTO `stage`(`tournament_id`, `stage_number`) VALUES (:tournament_id,:stage_number)');
         $query->execute( [
@@ -27,7 +27,7 @@ class StageModel extends Model{
 	    	'stage_number' => $stage_number
         ]);
     }
-    public function getStageByTournament($tournament_id,$number){
+    public function getStageByTournament(int $tournament_id,int $number){
         $db = $this->getDb();
         $query = $db->prepare('SELECT * FROM `stage` WHERE tournament_id = :tournament_id AND stage_number = :number');
         $query->execute( [
@@ -36,7 +36,7 @@ class StageModel extends Model{
         ]);
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
-    public function getAllStageByTournament($tournament_id){
+    public function getAllStageByTournament(int $tournament_id):array{
         $db = $this->getDb();
         $query = $db->prepare('SELECT * FROM `stage` WHERE tournament_id = :tournament_id');
         $query->execute( [
@@ -45,7 +45,7 @@ class StageModel extends Model{
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getRoundByStage($stage_id){
+    public function getRoundByStage(int $stage_id):array{
         $db = $this->getDb();
         $query = $db->prepare('SELECT * FROM `round` WHERE stage_id = :stage_id');
         $query->execute( [

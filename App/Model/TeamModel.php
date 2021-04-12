@@ -8,22 +8,22 @@ use \PDO;
 
 class TeamModel extends Model{
 
-    public function getTeam(){
+    public function getTeam():array{
         $db = $this->getDb();
         $stmt = $db->query('SELECT * FROM team');
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    public function sortLike(){
+    public function sortLike():array{
         $db = $this->getDb();
         $stmt = $db->query('SELECT * FROM `team` ORDER BY `nb_likes` + 0 DESC');
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    public function sortWin(){
+    public function sortWin():array{
         $db = $this->getDb();
         $stmt = $db->query('SELECT * FROM `team` ORDER BY `nb_victory` + 0 DESC');
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    public function getTeamByName($name){
+    public function getTeamByName(string $name):array{
         $db = $this->getDb();
         $stmt = $db->prepare('SELECT id FROM team WHERE name = :name');
         $stmt->execute([
@@ -31,7 +31,7 @@ class TeamModel extends Model{
         ]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    public function getTeamByName2($name){
+    public function getTeamByName2(string $name):array{
         $db = $this->getDb();
         $stmt = $db->prepare('SELECT id FROM team WHERE name = :name');
         $stmt->execute([
@@ -40,7 +40,7 @@ class TeamModel extends Model{
         $team = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $team[0];
     }
-    public function getTeamById($id){
+    public function getTeamById(int $id){
         $db = $this->getDb();
         $stmt = $db->prepare('SELECT * FROM team WHERE id = :id');
         $stmt->execute([
@@ -48,7 +48,7 @@ class TeamModel extends Model{
         ]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    public function getNameTeamById($id){
+    public function getNameTeamById(int $id):string{
         $db = $this->getDb();
         $stmt = $db->prepare('SELECT name FROM team WHERE id = :id');
         $stmt->execute([
@@ -57,7 +57,7 @@ class TeamModel extends Model{
         $team = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $team[0]['name'];
     }
-    public function getNameTeamById2($id){
+    public function getNameTeamById2(int $id):array{
         $db = $this->getDb();
         $stmt = $db->prepare('SELECT name FROM team WHERE id = :id');
         $stmt->execute([
@@ -67,7 +67,7 @@ class TeamModel extends Model{
         return $team;
     }
 
-    public function createTeams($name, $members)
+    public function createTeams(string $name, string $members)
     {
         $db = $this->getDb();
         $query = $db->prepare('INSERT INTO team (`name`, `members`) VALUES (:name, :members)');

@@ -14,7 +14,7 @@ class UserModel extends Model{
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function checkUser($email, string $password)
+    public function checkUser($email, string $password):array
     {
         $db = $this->getDb();
         $requete = $db->prepare('SELECT * FROM `user` WHERE email = :email AND password = :password');
@@ -25,7 +25,7 @@ class UserModel extends Model{
         return $requete->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function addUser(string $firstname, string $lastname, $email, string $password)
+    public function addUser(string $firstname, string $lastname, $email, string $password):void
     {
         $db = $this->getDb();
         $stmt = $db->prepare('INSERT INTO `user`(`first_name`, `last_name`, `email`, `password`) VALUES (:first_name,:last_name,:email,:password)');

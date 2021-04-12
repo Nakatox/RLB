@@ -10,11 +10,9 @@ use Framework\Controller;
 
 class AdminController extends Controller{
 
-    public function User(){
+    public function User():void{
         $userModel = new UserModel();
         $user = $userModel->getUser();
-        dump($user);
-        dump("salut");
         $this->renderTemplate('User.html');
     }
 }

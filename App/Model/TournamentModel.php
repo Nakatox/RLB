@@ -32,12 +32,12 @@ public function tournaments()
         return $classements;
     }
 
-    public function getTournament(){
+    public function getTournament():array{
         $db = $this->getDb();
         $stmt = $db->query('SELECT * FROM tournament');
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    public function getTournamentId($user_id,$name,$nb_stage){
+    public function getTournamentId(int $user_id,string $name,int $nb_stage):array{
         $db = $this->getDb();
         $stmt = $db->prepare('SELECT * FROM tournament WHERE user_id = :user_id AND name = :name AND nb_stage = :nb_stage');
         $stmt->execute([
@@ -47,7 +47,7 @@ public function tournaments()
         ]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    public function getTournamentByIdUser($user_id){
+    public function getTournamentByIdUser(int $user_id):array{
         $db = $this->getDb();
         $stmt = $db->prepare('SELECT * FROM tournament WHERE user_id = :user_id ');
         $stmt->execute([
@@ -55,14 +55,14 @@ public function tournaments()
         ]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    public function deleteTournamentById($id){
+    public function deleteTournamentById(int $id):void{
         $db = $this->getDb();
         $stmt = $db->prepare('DELETE FROM `tournament` WHERE id = :id');
         $stmt->execute([
             'id'=>$id,
         ]);
     }
-    public function editTournamentById($id, $name, $date){
+    public function editTournamentById(int $id, string $name, $date):void{
         $db = $this->getDb();
         $stmt = $db->prepare('UPDATE `tournament` SET `name`=:name,`date`=:date WHERE id = :id');
         $stmt->execute([
@@ -73,7 +73,7 @@ public function tournaments()
     }
 
 
-    public function insertTournament($userid,$name,$nb_stage){
+    public function insertTournament(int $userid,string $name,int $nb_stage):void{
         $db = $this->getDb();
         $stmt = $db->prepare('INSERT INTO `tournament`(`user_id`, `name`, `nb_stage`) VALUES (:user_id,:name,:nb_stage)');
         $stmt->execute([
@@ -83,7 +83,7 @@ public function tournaments()
         ]);
     }
      
-    public function insertClassement($id_tournament,$name,$score,$status){
+    public function insertClassement(int $id_tournament,string $name,int $score,string $status):void{
         $db = $this->getDb();
         $stmt = $db->prepare('INSERT INTO `classement`(`team`,`score`,`status`,`tournament_id`) VALUES (:team,:score,:status,:id_tournament)');
         $stmt->execute([
@@ -93,14 +93,14 @@ public function tournaments()
             'id_tournament'=>$id_tournament
         ]);
     }
-    public function deleteClassement($id){
+    public function deleteClassement(int $id):void{
         $db = $this->getDb();
         $stmt = $db->prepare('DELETE FROM `classement` WHERE tournament_id=:id');
         $stmt->execute([
             'id'=>$id,
         ]);
     }
-    public function addTournamentHasTeam($tournament_id,$team_id){
+    public function addTournamentHasTeam(int $tournament_id,int $team_id):void{
         $db = $this->getDb();
         $stmt = $db->prepare('INSERT INTO `tournaments_has_team`(`team_id`, `tournaments_id`) VALUES (:team_id,:tournament_id)');
         $stmt->execute([
@@ -108,7 +108,7 @@ public function tournaments()
             'tournament_id'=>$tournament_id
         ]);
     }
-    public function deleteTournamentHasTeam($tournament_id){
+    public function deleteTournamentHasTeam(int $tournament_id):void{
         $db = $this->getDb();
         $stmt = $db->prepare('DELETE FROM `tournaments_has_team` WHERE tournaments_id=:tournament_id');
         $stmt->execute([
@@ -116,7 +116,7 @@ public function tournaments()
         ]);
     }
 
-    public function tournamentById($id){
+    public function tournamentById(int $id):array{
         $db = $this->getDb();
         $stmt = $db->prepare('SELECT * FROM tournament WHERE id = :id');
         $stmt->execute([
@@ -126,7 +126,7 @@ public function tournaments()
         return $data;
     }
 
-    public function classementById($id){
+    public function classementById(int $id):array{
         $db = $this->getDb();
         $stmt = $db->prepare('SELECT * FROM classement WHERE tournament_id = :id ORDER BY score');
         $stmt->execute([
@@ -136,7 +136,7 @@ public function tournaments()
         return $data;
     }
 
-    public function insertWinner($id,$team){
+    public function insertWinner(int $id,string $team):void{
         $db = $this->getDb();
         $stmt = $db->prepare('UPDATE `tournament` SET `winner`=:team WHERE id = :id');
         $stmt->execute([
@@ -145,7 +145,7 @@ public function tournaments()
         ]);
     }
 
-    public function getWinner($id){
+    public function getWinner(int $id):array{
         $db = $this->getDb();
         $stmt = $db->prepare('SELECT `winner` FROM `tournament` WHERE id = :id');
         $stmt->execute([

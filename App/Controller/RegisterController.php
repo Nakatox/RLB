@@ -10,7 +10,7 @@ use Framework\Controller;
 
 class RegisterController extends Controller {
 
-    public function register() {
+    public function register():void {
 
         $this->renderTemplate('register.html');
         $pattern = '/^(?=.*[!@#$%^&*-])(?=.*[0-9])(?=.*[A-Z]).{8,20}$/';
@@ -27,7 +27,7 @@ class RegisterController extends Controller {
         }
     }
 
-    public function disconnect(){
+    public function disconnect():void{
         session_destroy();
         header('Location:/tournament/list');
     }

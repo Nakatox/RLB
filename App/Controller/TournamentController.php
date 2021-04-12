@@ -13,7 +13,7 @@ require('Tournament.php');
 
 class TournamentController extends Controller{
 
-    public function showTournaments() {
+    public function showTournaments():void {
         $tournamentModel = new TournamentModel();
         $tournaments = $tournamentModel->tournaments();
         $date = Date('Y-m-d');
@@ -24,7 +24,7 @@ class TournamentController extends Controller{
             return;
     }
 
-    public function showClassements() {
+    public function showClassements():void {
         $tournamentModel = new TournamentModel();
         $classements = $tournamentModel->classements();
 
@@ -48,7 +48,7 @@ class TournamentController extends Controller{
     }
    
 
-    public function createTournament(){
+    public function createTournament():void{
         if($_SESSION['id']!=""){
             $tournament = new TournamentModel();
             $team = new TeamModel();
@@ -110,7 +110,7 @@ class TournamentController extends Controller{
             die();
         }
     }   
-    public function showTournamentById($id){
+    public function showTournamentById(int $id):void{
         $tournament = new TournamentModel();
         $dataTournament = $tournament->TournamentById($id);
         $date = Date('Y-m-d');
@@ -119,7 +119,7 @@ class TournamentController extends Controller{
             'date'=>$date
         ]);
     }
-    public function showClassement($id){
+    public function showClassement(int $id):void{
         $classement =new TournamentModel();
         $data = $classement->classementById($id);
         $json = json_encode($data);
@@ -127,7 +127,7 @@ class TournamentController extends Controller{
         header('Content-type: application/json');
         echo $json;
     }
-    public function showTournamentByUser(){
+    public function showTournamentByUser():void{
         if($_SESSION['id']!=""){
             $tournamentsModel = new TournamentModel();
             $tournaments = $tournamentsModel->getTournamentByIdUser($_SESSION['id']);
@@ -139,7 +139,7 @@ class TournamentController extends Controller{
             die();
         }
     }
-    public function editTournamentById($id){
+    public function editTournamentById(int $id):void{
         if($_SESSION['id']!=""){
             $tournamentsModel = new TournamentModel();
             if(!empty($_POST["name"]) && strlen($_POST['name']) > 4 && strlen($_POST['name']) < 100 && !empty($_POST["date"])){
@@ -156,7 +156,7 @@ class TournamentController extends Controller{
             die();
         }
     }
-    public function deleteTournamentById($id){
+    public function deleteTournamentById(int $id):void{
         if($_SESSION['id']!=""){
             $tournamentsModel = new TournamentModel();
             $tournamentsModel->deleteTournamentHasTeam($id);
@@ -169,7 +169,7 @@ class TournamentController extends Controller{
         }
     }
 
-    public function manageTournament($id){
+    public function manageTournament(int $id):void{
         if($_SESSION['id']!=""){
             $allRounds = [];
             $stage4=[
@@ -288,7 +288,7 @@ class TournamentController extends Controller{
             die();
         }
     }
-    public function showTournament($id){
+    public function showTournament(int $id):void{
         $allRounds = [];
         $stage4=[
             ['1'=>"",'2'=>""],

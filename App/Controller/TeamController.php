@@ -21,7 +21,7 @@ class TeamController extends Controller{
         
     }
 
-    public function showTeamById($id){
+    public function showTeamById(int $id):void{
         $teamModel = new TeamModel();
         $team = $teamModel->getTeamById($id);
         $this->renderTemplate('show-team.html',[
@@ -29,7 +29,7 @@ class TeamController extends Controller{
         ]);
     }
 
-    public function showTeams(){
+    public function showTeams():void{
         $teamModel = new TeamModel();
         $teams = $teamModel->getTeam();
         $this->renderTemplate('show-all-teams.html',[
@@ -37,7 +37,7 @@ class TeamController extends Controller{
         ]);
     }
 
-    public function showSortLikes(){
+    public function showSortLikes():void{
         $teamModel = new TeamModel();
         $teams = $teamModel->sortLike();
         $this->renderTemplate('show-all-teams.html',[
@@ -45,7 +45,7 @@ class TeamController extends Controller{
         ]);
     }
 
-    public function showSortWins(){
+    public function showSortWins():void{
         $teamModel = new TeamModel();
         $teams = $teamModel->sortWin();
         $this->renderTemplate('show-all-teams.html',[
