@@ -31,6 +31,15 @@ class TeamModel extends Model{
         ]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function getTeamByName2($name){
+        $db = $this->getDb();
+        $stmt = $db->prepare('SELECT id FROM team WHERE name = :name');
+        $stmt->execute([
+            'name'=>$name,
+        ]);
+        $team = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $team[0];
+    }
     public function getTeamById($id){
         $db = $this->getDb();
         $stmt = $db->prepare('SELECT * FROM team WHERE id = :id');
@@ -38,6 +47,15 @@ class TeamModel extends Model{
             'id'=>$id,
         ]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function getNameTeamById($id){
+        $db = $this->getDb();
+        $stmt = $db->prepare('SELECT name FROM team WHERE id = :id');
+        $stmt->execute([
+            'id'=>$id,
+        ]);
+        $team = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $team[0]['name'];
     }
 
     public function createTeams($name, $members)

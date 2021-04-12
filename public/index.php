@@ -32,6 +32,7 @@ $router->get('/admin/tournament/list', '\App\Controller\TournamentController@sho
 
 //déroulement d'un tournois coté admin
 $router->get('/admin/tournament/{id}/manage', '\App\Controller\TournamentController@manageTournament');
+$router->post('/admin/tournament/{id}/manage', '\App\Controller\TournamentController@manageTournament');
 
 
 // liste de tournois

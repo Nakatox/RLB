@@ -36,6 +36,14 @@ class StageModel extends Model{
         ]);
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function getAllStageByTournament($tournament_id){
+        $db = $this->getDb();
+        $query = $db->prepare('SELECT * FROM `stage` WHERE tournament_id = :tournament_id');
+        $query->execute( [
+            'tournament_id' => $tournament_id,
+        ]);
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
 
     public function getRoundByStage($stage_id){
         $db = $this->getDb();

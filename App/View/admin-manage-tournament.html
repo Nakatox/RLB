@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/CSS/admin-manage-tournament.css">
+    <link rel="stylesheet" href="/assets/CSS/reset.css">
+    <title>Document</title>
+</head>
+<body>
+    {% include 'header.html'%}
+
+    <h1>{{tournament.name}}</h1>
+<main id="tournament">
+    {% if tournament.nb_stage == 4 %}
+    <form action="/admin/tournament/{{tournament.id}}/manage" method="POST">
+        <ul class="round round-1">
+            <li class="spacer">&nbsp;</li>
+            
+            <li class="game game-top">{{round4[0]['1']}}</li>
+            <li class="game game-spacer">
+                <select class="nb" name="round4-1">
+                    <option value="{{round4[0]['1']}}">{{round4[0]['1']}}</option>
+                    <option value="{{round4[0]['2']}}">{{round4[0]['2']}}</option>
+                </select>
+            </li>
+            <li class="game game-bottom ">{{round4[0]['2']}}</li>
+
+            <li class="spacer">&nbsp;</li>
+            
+            <li class="game game-top">{{round4[1]['1']}}</li>
+            <li class="game game-spacer">
+                <select class="nb" name="round4-2">
+                    <option value="{{round4[1]['1']}}">{{round4[1]['1']}}</option>
+                    <option value="{{round4[1]['2']}}">{{round4[1]['2']}}</option>
+                </select>
+            </li>
+            <li class="game game-bottom ">{{round4[1]['2']}}</li>
+
+            <li class="spacer">&nbsp;</li>
+            
+            <li class="game game-top ">{{round4[2]['1']}}</li>
+            <li class="game game-spacer">
+                <select class="nb" name="round4-3">
+                    <option value="{{round4[2]['1']}}">{{round4[2]['1']}}</option>
+                    <option value="{{round4[2]['2']}}">{{round4[2]['2']}}</option>
+                </select>
+            </li>
+            <li class="game game-bottom">{{round4[2]['2']}}</li>
+
+            <li class="spacer">&nbsp;</li>
+            
+            <li class="game game-top">{{round4[3]['1']}}</li>
+            <li class="game game-spacer">
+                <select class="nb" name="round4-4">
+                    <option value="{{round4[3]['1']}}">{{round4[3]['1']}}</option>
+                    <option value="{{round4[3]['2']}}">{{round4[3]['2']}}</option>
+                </select>
+            </li>
+            <li class="game game-bottom ">{{round4[3]['2']}}</li>
+
+            <li class="spacer">&nbsp;</li>
+            
+            <li class="game game-top">{{round4[4]['1']}}</li>
+            <li class="game game-spacer">
+                <select class="nb" name="round4-5">
+                    <option value="{{round4[4]['1']}}">{{round4[4]['1']}}</option>
+                    <option value="{{round4[4]['2']}}">{{round4[4]['2']}}</option>
+                </select>
+            </li>
+            <li class="game game-bottom ">{{round4[4]['2']}}</li>
+
+            <li class="spacer">&nbsp;</li>
+            
+            <li class="game game-top">{{round4[5]['1']}}</li>
+            <li class="game game-spacer">
+                <select class="nb" name="round4-6">
+                    <option value="{{round4[5]['1']}}">{{round4[5]['1']}}</option>
+                    <option value="{{round4[5]['2']}}">{{round4[5]['2']}}</option>
+                </select>
+            </li>
+            <li class="game game-bottom ">{{round4[5]['2']}}</li>
+
+            <li class="spacer">&nbsp;</li>
+            
+            <li class="game game-top">{{round4[6]['1']}}</li>
+            <li class="game game-spacer">
+                <select class="nb" name="round4-7">
+                    <option value="{{round4[6]['1']}}">{{round4[6]['1']}}</option>
+                    <option value="{{round4[6]['2']}}">{{round4[6]['2']}}</option>
+                </select>
+            </li>
+            <li class="game game-bottom ">{{round4[6]['2']}}</li>
+
+            <li class="spacer">&nbsp;</li>
+            
+            <li class="game game-top">{{round4[7]['1']}}</li>
+            <li class="game game-spacer">
+                <select class="nb" name="round4-8">
+                    <option value="{{round4[7]['1']}}">{{round4[7]['1']}}</option>
+                    <option value="{{round4[7]['2']}}">{{round4[7]['2']}}</option>
+                </select>
+            </li>
+            <li class="game game-bottom ">{{round4[7]['2']}}</li>
+
+            <li class="spacer">&nbsp;</li>
+        </ul>
+        <input type="submit" value="comfirm">
+
+    </form>
+    {% endif %}
+
+    {% if tournament.nb_stage >= 3  %}
+    
+        <ul class="round round-2">
+            <li class="spacer">&nbsp;</li>
+            <form action="/admin/tournament/{{tournament.id}}/manage" method="POST">
+            <li class="game game-top">{{round3[0]['1']}} </li>
+            <li class="game game-spacer">
+                <select class="nb" name="round3-1">
+                    <option value="{{round3[0]['1']}}">{{round3[0]['1']}}</option>
+                    <option value="{{round3[0]['2']}}">{{round3[0]['2']}}</option>
+                </select>
+            </li>
+            <li class="game game-bottom ">{{round3[0]['2']}} </li>
+
+            <li class="spacer">&nbsp;</li>
+            
+            <li class="game game-top">{{round3[1]['1']}} </li>
+            <li class="game game-spacer">
+                <select class="nb" name="round3-2">
+                    <option value="{{round3[1]['1']}}">{{round3[1]['1']}}</option>
+                    <option value="{{round3[1]['2']}}">{{round3[1]['2']}}</option>
+                </select>
+            </li>
+            <li class="game game-bottom ">{{round3[1]['2']}} </li>
+
+            <li class="spacer">&nbsp;</li>
+            
+            <li class="game game-top ">{{round3[2]['1']}}</li>
+            <li class="game game-spacer">
+                <select class="nb" name="round3-3">
+                    <option value="{{round3[2]['1']}}">{{round3[2]['1']}}</option>
+                    <option value="{{round3[2]['2']}}">{{round3[2]['2']}}</option>
+                </select>
+            </li>
+            <li class="game game-bottom">{{round3[2]['2']}}</li>
+
+            <li class="spacer">&nbsp;</li>
+            
+            <li class="game game-top ">{{round3[3]['1']}}</li>
+            <li class="game game-spacer">
+                <select class="nb" name="round3-4">
+                    <option value="{{round3[3]['1']}}">{{round3[3]['1']}}</option>
+                    <option value="{{round3[3]['2']}}">{{round3[3]['2']}}</option>
+                </select>
+            </li>
+            <li class="game game-bottom">{{round3[3]['2']}}</li>
+            <input type="submit" value="comfirm">
+        </form>
+            <li class="spacer">&nbsp;</li>
+        </ul>
+    
+    {% endif %}
+
+    {% if tournament.nb_stage >= 2 %}
+    
+    <ul class="round round-3">
+        <li class="spacer">&nbsp;</li>
+        <form action="/admin/tournament/{{tournament.id}}/manage" method="POST">
+            <li class="game game-top">{{round2[0]['1']}} </li>
+            <li class="game game-spacer">
+                <select class="nb" name="round2-1">
+                    <option value="{{round2[0]['1']}}">{{round2[0]['1']}}</option>
+                    <option value="{{round2[0]['2']}}">{{round2[0]['2']}}</option>
+                </select>
+            </li>
+            <li class="game game-spacer">&nbsp;</li>
+            <li class="game game-bottom ">{{round2[0]['2']}}</li>
+
+            <li class="spacer">&nbsp;</li>
+            <li class="spacer">&nbsp;</li>
+            <li class="spacer">&nbsp;</li>
+            <li class="spacer">&nbsp;</li>
+            <li class="spacer">&nbsp;</li>
+
+            
+            <li class="game game-top ">{{round2[1]['1']}}</li>
+            <li class="game game-spacer">
+                <select class="nb" name="round2-2">
+                    <option value="{{round2[1]['1']}}">{{round2[1]['1']}}</option>
+                    <option value="{{round2[1]['2']}}">{{round2[1]['2']}}</option>
+                </select>
+            </li>
+            <li class="game game-spacer">&nbsp;</li>
+            <li class="game game-bottom">{{round2[1]['2']}}</li>
+            <input type="submit" value="comfirm">
+        </form>
+        <li class="spacer">&nbsp;</li>
+    </ul>
+    {% endif %}
+    
+        <ul class="round round-4">
+            <li class="spacer">&nbsp;</li>
+            <form action="/admin/tournament/{{tournament.id}}/manage" method="POST">
+                <li class="game game-top">{{round1[0]['1']}}</li>
+                <li class="game game-spacer">&nbsp;</li>
+                <li class="game game-spacer">
+                    <select class="nb" name="round1-1">
+                        <option value="{{round1[0]['1']}}">{{round1[0]['1']}}</option>
+                        <option value="{{round1[0]['2']}}">{{round1[0]['2']}}</option>
+                    </select>
+                </li>
+                <li class="game game-spacer">&nbsp;</li>
+                <li class="game game-bottom ">{{round1[0]['2']}}</li>
+            <input type="submit" value="comfirm">
+
+            </form>	
+            <li class="spacer">&nbsp;</li>
+        </ul>	
+    
+</main>
+</body>
+</html>

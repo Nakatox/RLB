@@ -58,6 +58,17 @@ class TournamentController extends Controller{
             if(!empty($_POST["name"]) && strlen($_POST['name']) > 4 && strlen($_POST['name']) < 100 && !empty($_POST["teamChosen"])){
                 //les équipes font du 1v1 donc ondivise le nombre de participant par deux pour avoir le tot d'étapes 
                 $nb_stage = count($_POST["teamChosen"])/2;
+                $number_of_stage = 0;
+                if(count($_POST["teamChosen"]) == 16){
+                $number_of_stage = 4;
+                    
+                }else if(count($_POST["teamChosen"]) == 8){
+                    $number_of_stage = 3;
+                        
+                }else if(count($_POST["teamChosen"]) == 4){
+                    $number_of_stage = 2;
+                        
+                }
                 $name = $_POST["name"];
                 $teamChoose = $_POST["teamChosen"];
                 $allteamsId = [];
@@ -69,8 +80,8 @@ class TournamentController extends Controller{
                     'teams'=>[]
                 ];
 
-                $tournament->insertTournament(1,$name,$nb_stage);
-                $id_tournament = $tournament->getTournamentId($_SESSION['id'],$name,$nb_stage); //Ici les id sont a 1 par defaut car pas encore de Session
+                $tournament->insertTournament($_SESSION['id'],$name,$number_of_stage);
+                $id_tournament = $tournament->getTournamentId($_SESSION['id'],$name,$number_of_stage); //Ici les id sont a 1 par defaut car pas encore de Session
                 foreach ($teamChoose as $key => $value) {
                     $tournament->insertClassement($id_tournament[0]['id'], $value, 0, "in-progress");
                 }
@@ -79,18 +90,16 @@ class TournamentController extends Controller{
                     $tournament->addTournamentHasTeam($id_tournament[0]['id'],$teamid[0]['id']);
                     array_push($allteamsId,$teamid[0]['id']);
                 }
-                $stage->insertStage($id_tournament[0]['id'],1);
+                $stage->insertStage($id_tournament[0]['id'],$number_of_stage);
 
-                    $id_stage = $stage->getStageByTournament($id_tournament[0]['id'],1);
+                    $id_stage = $stage->getStageByTournament($id_tournament[0]['id'],$number_of_stage);
                     $teamsIdChoose = [];
                 for ($i=0; $i < $nb_stage; $i++) { 
                     $stage->insertRound($id_stage[0]['id'],$allteamsId[0],$allteamsId[1],$i);
                     for ($y=0; $y < 2; $y++) { 
-                        // array_push($teamsIdChoose,$teamid);
                         unset($allteamsId[$y]);
                     }
-                    array_values($allteamsId);
-                    dump($allteamsId);
+                    $allteamsId = array_values($allteamsId);
                 }
             }
             $this->renderTemplate('admin-createTournament.html',[
@@ -162,9 +171,115 @@ class TournamentController extends Controller{
 
     public function manageTournament($id){
         if($_SESSION['id']!=""){
-            
+            $allRounds = [];
+            $stage4=[
+                ['1'=>"",'2'=>""],
+                ['1'=>"",'2'=>""],
+                ['1'=>"",'2'=>""],
+                ['1'=>"",'2'=>""],
+                ['1'=>"",'2'=>""],
+                ['1'=>"",'2'=>""],
+                ['1'=>"",'2'=>""],
+                ['1'=>"",'2'=>""],
+            ];
+            $stage3=[
+                ['1'=>"",'2'=>""],
+                ['1'=>"",'2'=>""],
+                ['1'=>"",'2'=>""],
+                ['1'=>"",'2'=>""],
+            ];
+            $stage2=[
+                ['1'=>"",'2'=>""],
+                ['1'=>"",'2'=>""],
+            ];
+            $stage1=[
+                ['1'=>"",'2'=>""],
+            ];
+            $tournamentModel = new TournamentModel();
+            $stageModel = new StageModel();
+            $teamModel = new TeamModel();
+            $stage = new StageModel();
 
-            $this->renderTemplate('admin-manage-tournament.html');
+            $tournament = $tournamentModel->tournamentById($id);
+            $allStages = $stageModel->getAllStageByTournament($id);
+            dump($allStages);
+            for ($i=0; $i < count($allStages); $i++) { 
+              array_push($allRounds,$stageModel->getRoundByStage($allStages[$i]['id']))  ;
+            }
+            for ($y=0; $y < count($allRounds); $y++) { 
+                if(count($allRounds[$y]) == 8){
+                    foreach($stage4 as $key =>$value){
+                        $stage4[$key]['1'] = $teamModel->getNameTeamById($allRounds[$y][$key]['team_1']);
+                        $stage4[$key]['2'] = $teamModel->getNameTeamById($allRounds[$y][$key]['team_2']);
+                    }
+                }else if(count($allRounds[$y]) == 4){
+                    foreach($stage3 as $key =>$value){
+                        $stage3[$key]['1'] = $teamModel->getNameTeamById($allRounds[$y][$key]['team_1']);
+                        $stage3[$key]['2'] = $teamModel->getNameTeamById($allRounds[$y][$key]['team_2']);
+                    }
+                }else if(count($allRounds[$y]) == 2){
+                    foreach($stage2 as $key =>$value){
+                        $stage2[$key]['1'] = $teamModel->getNameTeamById($allRounds[$y][$key]['team_1']);
+                        $stage2[$key]['2'] = $teamModel->getNameTeamById($allRounds[$y][$key]['team_2']);
+                    }
+                }else if(count($allRounds[$y]) == 1){
+                    foreach($stage1 as $key =>$value){
+                        $stage1[$key]['1'] = $teamModel->getNameTeamById($allRounds[$y][$key]['team_1']);
+                        $stage1[$key]['2'] = $teamModel->getNameTeamById($allRounds[$y][$key]['team_2']);
+                    }
+                }
+            }
+            if(isset($_POST['round4-1'])){
+                $stage->insertStage($id,4);
+                $allteamsId = [$teamModel->getTeamByName2($_POST['round3-1']),$teamModel->getTeamByName2($_POST['round3-2']),$teamModel->getTeamByName2($_POST['round3-3']),$teamModel->getTeamByName2($_POST['round3-4'])];
+
+                $id_stage = $stage->getStageByTournament($id,4);
+                for ($i=0; $i < 4; $i++) { 
+                    $stage->insertRound($id_stage[0]['id'],$allteamsId[0]['id'],$allteamsId[1]['id'],$i);
+                    for ($y=0; $y < 2; $y++) { 
+                        unset($allteamsId[$y]);
+                    }
+                    $allteamsId = array_values($allteamsId);
+                }
+            }
+            if(isset($_POST['round3-1'])){
+                $stage->insertStage($id,2);
+                $allteamsId = [$teamModel->getTeamByName2($_POST['round3-1']),$teamModel->getTeamByName2($_POST['round3-2']),$teamModel->getTeamByName2($_POST['round3-3']),$teamModel->getTeamByName2($_POST['round3-4'])];
+
+                $id_stage = $stage->getStageByTournament($id,2);
+                for ($i=0; $i < 2; $i++) { 
+                    $stage->insertRound($id_stage[0]['id'],$allteamsId[0]['id'],$allteamsId[1]['id'],$i);
+                    for ($y=0; $y < 2; $y++) { 
+                        unset($allteamsId[$y]);
+                    }
+                    $allteamsId = array_values($allteamsId);
+                }
+            }
+            if(isset($_POST['round2-1'])){
+                $stage->insertStage($id,1);
+                $allteamsId = [$teamModel->getTeamByName2($_POST['round2-1']),$teamModel->getTeamByName2($_POST['round2-2'])];
+
+                $id_stage = $stage->getStageByTournament($id,1);
+                for ($i=0; $i < 1; $i++) { 
+                    $stage->insertRound($id_stage[0]['id'],$allteamsId[0]['id'],$allteamsId[1]['id'],$i);
+                    for ($y=0; $y < 2; $y++) { 
+                        unset($allteamsId[$y]);
+                    }
+                    $allteamsId = array_values($allteamsId);
+                }
+            }
+
+            if(isset($_POST['round1-1'])){
+                
+            }
+            $this->renderTemplate('admin-manage-tournament.html',[
+                'tournament'=>$tournament[0],
+                'allRounds'=>$allRounds,
+                'round4'=>$stage4,
+                'round3'=>$stage3,
+                'round2'=>$stage2,
+                'round1'=>$stage1,
+            ]);
         }else{
             http_response_code(404);
             die();
