@@ -47,6 +47,9 @@ $router->get('/teams/all/like', '\App\Controller\TeamController@showSortLikes');
 $router->get('/teams/all/win', '\App\Controller\TeamController@showSortWins');
 $router->get('/create/teams', '\App\Controller\TeamController@showcreateTeamsForm');
 $router->post('/create/teams', '\App\Controller\TeamController@showcreateTeamsForm');
+$router->get('/team/{id}/getLike', '\App\Controller\TeamController@getLike');
+$router->post('/team/{id}/addLike', '\App\Controller\TeamController@addLike');
+$router->post('/team/{id}/removeLike', '\App\Controller\TeamController@removeLike');
 
 //tournoi
 $router->get('/tournament/classement/{id}', '\App\Controller\TournamentController@showClassement');

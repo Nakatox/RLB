@@ -13,8 +13,16 @@ class UserModel extends Model{
         $stmt = $db->query('SELECT * FROM user');
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function getUserPassword(string $email):array{
+        $db = $this->getDb();
+        $stmt = $db->prepare('SELECT password FROM user WHERE email = :email');
+        $stmt->execute([
+            'email' => $email, 
+        ]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
-    public function checkUser($email, string $password):array
+    public function checkUser($email, $password):array
     {
         $db = $this->getDb();
         $requete = $db->prepare('SELECT * FROM `user` WHERE email = :email AND password = :password');

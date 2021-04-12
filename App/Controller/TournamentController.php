@@ -290,6 +290,7 @@ class TournamentController extends Controller{
             if(isset($_POST['round1-1'])){
                 $idTeam = $teamModel->getTeamByName2($_POST['round1-1']);
                 $tournamentModel->insertWinner($id, $teamModel->getNameTeamById($idTeam['id']));
+                $teamModel->addVictory($idTeam['id']);
                 header('Location:/admin/tournament/'.$id.'/manage');
             }
             $state = 4;

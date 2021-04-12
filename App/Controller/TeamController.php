@@ -20,6 +20,46 @@ class TeamController extends Controller{
         
         
     }
+    public function getLike($id){
+        $like_bd = new TeamModel();
+        $likes = $like_bd->getLikes($id);
+
+        $data = [
+            'count' => $likes
+        ];
+
+        $json = json_encode($data);
+        
+        header('Content-type: application/json');
+
+        echo $json;
+    }
+    public function addLike($id){
+        $like_bd = new TeamModel();
+        $likes = $like_bd->addLike($id);
+        $data = [
+            'status' => $likes,
+        ];
+
+        $json = json_encode($data);
+        
+        header('Content-type: application/json');
+
+        echo $json;
+    }
+    public function removeLike($id){
+        $like = new TeamModel();
+        $likes = $like->removeLike($id);
+        $data = [
+            'status' => $likes,
+        ];
+
+        $json = json_encode($data);
+        
+        header('Content-type: application/json');
+
+        echo $json;
+    }
 
     public function showTeamById(int $id):void{
         $teamModel = new TeamModel();
@@ -65,8 +105,6 @@ class TeamController extends Controller{
             
             ]);
             return;
-            
-            
             
             
     }

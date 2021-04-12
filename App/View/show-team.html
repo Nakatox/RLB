@@ -9,17 +9,65 @@
 
     <title>Document</title>
 </head>
+<style>
+    .id{
+        visibility: hidden;
+    }
+</style>
 <body>
     {% include 'header.html'%}
+    <p class="id">{{team.id}}</p>
     <div class="container">
         <div>
             <p class="nameTeam">{{team.name}}</p>
         </div>
         <div class="infos">
             <p>{{team.nb_victory}} win</p>
-            <p>{{team.nb_likes}} Likes</p>
+            <p>Likes : <span class="counter"></span></p>
+            <input type="submit" value="Like" class="button">
         </div>
         <p class="player">Player in this team : {{team.members}}</p>
     </div>
 </body>
+<script>
+    let button = document.querySelector('.button')
+    let counter = document.querySelector('.counter')
+    let id = document.querySelector('.id').textContent
+    let check = 0
+
+    getLike()
+    function getLike(){
+        fetch(`/team/${id}/getLike`)
+        .then(response=>response.json())
+        .then(data=>{
+            counter.innerHTML = data.count[0].nb_likes
+        })
+    }
+
+    button.addEventListener('click', function(e){
+        if(check == 0 ){
+            fetch(`/team/${id}/addLike`,{
+                method:"POST"
+            })
+            .then(response=>response.json())
+            .then(data=>{
+                button.value = "unlike"
+                check++
+                getLike()
+            })
+        }
+        if(check == 1){
+            fetch(`/team/${id}/removeLike`,{
+                method:"POST"
+            })
+            .then(response=>response.json())
+            .then(data=>{
+                button.value = "like"
+                check = 0
+            getLike()
+            })
+        }
+    })
+
+</script>
 </html>

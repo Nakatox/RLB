@@ -40,13 +40,35 @@ class TeamModel extends Model{
         $team = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $team[0];
     }
-    public function getTeamById(int $id){
+    public function getTeamById(int $id):array{
         $db = $this->getDb();
         $stmt = $db->prepare('SELECT * FROM team WHERE id = :id');
         $stmt->execute([
             'id'=>$id,
         ]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function getLikes(int $id):array{
+        $db = $this->getDb();
+        $stmt = $db->prepare('SELECT nb_likes FROM team WHERE id = :id');
+        $stmt->execute([
+            'id'=>$id
+        ]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function addLike(int $id):void{
+        $db = $this->getDb();
+        $stmt = $db->prepare('UPDATE `team` SET `nb_likes`= `nb_likes` + 1 WHERE id = :id');
+        $stmt->execute([
+            'id'=>$id
+        ]);
+    }
+    public function removeLike(int $id):void{
+        $db = $this->getDb();
+        $stmt = $db->prepare('UPDATE `team` SET `nb_likes`= `nb_likes` - 1 WHERE id = :id');
+        $stmt->execute([
+            'id'=>$id
+        ]);
     }
     public function getNameTeamById(int $id):string{
         $db = $this->getDb();
@@ -67,7 +89,7 @@ class TeamModel extends Model{
         return $team;
     }
 
-    public function createTeams(string $name, string $members)
+    public function createTeams(string $name, string $members):void
     {
         $db = $this->getDb();
         $query = $db->prepare('INSERT INTO team (`name`, `members`) VALUES (:name, :members)');
@@ -76,5 +98,12 @@ class TeamModel extends Model{
 	    	'members' => $members
     ]);
   
+    }
+    public function addVictory(int $id):void{
+        $db = $this->getDb();
+        $query = $db->prepare('UPDATE `team` SET `nb_victory` = nb_victory + 1 WHERE id = :id');
+        $query->execute( [
+            'id' => $id,
+    ]);
     }
 }

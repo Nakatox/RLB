@@ -18,10 +18,10 @@ class RegisterController extends Controller {
         if (isset($_POST['firstname']) && strlen($_POST['firstname'])>2 && strlen($_POST['firstname']) < 20 && isset($_POST['lastname'])&& strlen($_POST['lastname'])>2 && strlen($_POST['lastname']) < 20 && isset($_POST['email']) && preg_match($pattern2,$_POST['email']) && isset($_POST['password'])&& strlen($_POST['password'])>3&& strlen($_POST['password'])<20 && preg_match($pattern, $_POST['password'])) {
 
             $userModel = new UserModel();
-            $user = $userModel->checkUser($_POST['firstname'], $_POST['lastname'], $_POST['email'], $_POST['password']);
+            $user = $userModel->checkUser($_POST['firstname'], $_POST['lastname'], $_POST['email'], password_hash($_POST['password'],PASSWORD_DEFAULT));
 
             if (!$user) {
-                $user = $userModel->addUser($_POST['firstname'], $_POST['lastname'], $_POST['email'], $_POST['password']);
+                $user = $userModel->addUser($_POST['firstname'], $_POST['lastname'], $_POST['email'], password_hash($_POST['password'],PASSWORD_DEFAULT));
                 header('Location: /login');
             }
         }
