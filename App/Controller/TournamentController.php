@@ -84,7 +84,7 @@ class TournamentController extends Controller{
                     'teams'=>[]
                 ];
 
-                $tournament->insertTournament($_SESSION['id'],$name,$number_of_stage);
+                $tournament->insertTournament($_SESSION['id'],$name,$number_of_stage,$_POST["date"]);
                 $id_tournament = $tournament->getTournamentId($_SESSION['id'],$name,$number_of_stage); //Ici les id sont a 1 par defaut car pas encore de Session
                 foreach ($teamChoose as $key => $value) {
                     $tournament->insertClassement($id_tournament[0]['id'], $value, 0, "in-progress");

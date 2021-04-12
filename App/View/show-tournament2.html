@@ -14,6 +14,9 @@
     {% include 'header.html'%}
 
     <h1 class="title">{{tournament.name}}</h1>
+    {% if winner == "" %}
+        <h2 class="progress">In progress...</h2>
+    {% endif %}
 <main id="tournament">
     {% if tournament.nb_stage == 4 %}
         <ul class="round round-1">
@@ -133,10 +136,7 @@
             <li class="spacer">&nbsp;</li>
         </ul>	
         {% if winner != "" %}
-        <h2 class="winner">{{winner}}</h2>
-        {% else %}
-        <h2 class="progress">In progress...</h2>
-
+            <h2 class="winner">{{winner}}</h2>
         {% endif %}
 </main>
 </body>

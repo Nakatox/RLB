@@ -73,12 +73,13 @@ public function tournaments()
     }
 
 
-    public function insertTournament(int $userid,string $name,int $nb_stage):void{
+    public function insertTournament(int $userid,string $name,int $nb_stage,$date):void{
         $db = $this->getDb();
-        $stmt = $db->prepare('INSERT INTO `tournament`(`user_id`, `name`, `nb_stage`) VALUES (:user_id,:name,:nb_stage)');
+        $stmt = $db->prepare('INSERT INTO `tournament`(`user_id`, `name`, `nb_stage`,date) VALUES (:user_id,:name,:nb_stage,:date)');
         $stmt->execute([
             'user_id'=>$userid,
             'name'=>$name,
+            'date'=>$date,
             'nb_stage'=>$nb_stage
         ]);
     }
