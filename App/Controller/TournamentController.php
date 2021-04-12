@@ -195,6 +195,7 @@ class TournamentController extends Controller{
             $stage1=[
                 ['1'=>"",'2'=>""],
             ];
+            $winner="";
             $tournamentModel = new TournamentModel();
             $stageModel = new StageModel();
             $teamModel = new TeamModel();
@@ -202,7 +203,6 @@ class TournamentController extends Controller{
 
             $tournament = $tournamentModel->tournamentById($id);
             $allStages = $stageModel->getAllStageByTournament($id);
-            dump($allStages);
             for ($i=0; $i < count($allStages); $i++) { 
               array_push($allRounds,$stageModel->getRoundByStage($allStages[$i]['id']))  ;
             }
@@ -270,8 +270,10 @@ class TournamentController extends Controller{
             }
 
             if(isset($_POST['round1-1'])){
-                
+                $idTeam = $teamModel->getTeamByName2($_POST['round1-1']);
+                $tournamentModel->insertWinner($id, $teamModel->getNameTeamById($idTeam['id']));
             }
+            $winner = $tournamentModel->getWinner($id);
             $this->renderTemplate('admin-manage-tournament.html',[
                 'tournament'=>$tournament[0],
                 'allRounds'=>$allRounds,
@@ -279,11 +281,82 @@ class TournamentController extends Controller{
                 'round3'=>$stage3,
                 'round2'=>$stage2,
                 'round1'=>$stage1,
+                'winner'=>$winner[0]['winner']
             ]);
         }else{
             http_response_code(404);
             die();
         }
+    }
+    public function showTournament($id){
+        $allRounds = [];
+        $stage4=[
+            ['1'=>"",'2'=>""],
+            ['1'=>"",'2'=>""],
+            ['1'=>"",'2'=>""],
+            ['1'=>"",'2'=>""],
+            ['1'=>"",'2'=>""],
+            ['1'=>"",'2'=>""],
+            ['1'=>"",'2'=>""],
+            ['1'=>"",'2'=>""],
+        ];
+        $stage3=[
+            ['1'=>"",'2'=>""],
+            ['1'=>"",'2'=>""],
+            ['1'=>"",'2'=>""],
+            ['1'=>"",'2'=>""],
+        ];
+        $stage2=[
+            ['1'=>"",'2'=>""],
+            ['1'=>"",'2'=>""],
+        ];
+        $stage1=[
+            ['1'=>"",'2'=>""],
+        ];
+        $winner="";
+        $tournamentModel = new TournamentModel();
+        $stageModel = new StageModel();
+        $teamModel = new TeamModel();
+        $stage = new StageModel();
+
+        $tournament = $tournamentModel->tournamentById($id);
+        $allStages = $stageModel->getAllStageByTournament($id);
+        for ($i=0; $i < count($allStages); $i++) { 
+            array_push($allRounds,$stageModel->getRoundByStage($allStages[$i]['id']))  ;
+        }
+        for ($y=0; $y < count($allRounds); $y++) { 
+            if(count($allRounds[$y]) == 8){
+                foreach($stage4 as $key =>$value){
+                    $stage4[$key]['1'] = $teamModel->getNameTeamById($allRounds[$y][$key]['team_1']);
+                    $stage4[$key]['2'] = $teamModel->getNameTeamById($allRounds[$y][$key]['team_2']);
+                }
+            }else if(count($allRounds[$y]) == 4){
+                foreach($stage3 as $key =>$value){
+                    $stage3[$key]['1'] = $teamModel->getNameTeamById($allRounds[$y][$key]['team_1']);
+                    $stage3[$key]['2'] = $teamModel->getNameTeamById($allRounds[$y][$key]['team_2']);
+                }
+            }else if(count($allRounds[$y]) == 2){
+                foreach($stage2 as $key =>$value){
+                    $stage2[$key]['1'] = $teamModel->getNameTeamById($allRounds[$y][$key]['team_1']);
+                    $stage2[$key]['2'] = $teamModel->getNameTeamById($allRounds[$y][$key]['team_2']);
+                }
+            }else if(count($allRounds[$y]) == 1){
+                foreach($stage1 as $key =>$value){
+                    $stage1[$key]['1'] = $teamModel->getNameTeamById($allRounds[$y][$key]['team_1']);
+                    $stage1[$key]['2'] = $teamModel->getNameTeamById($allRounds[$y][$key]['team_2']);
+                }
+            }
+        }
+        $winner = $tournamentModel->getWinner($id);
+        $this->renderTemplate('show-tournament2.html',[
+            'tournament'=>$tournament[0],
+            'allRounds'=>$allRounds,
+            'round4'=>$stage4,
+            'round3'=>$stage3,
+            'round2'=>$stage2,
+            'round1'=>$stage1,
+            'winner'=>$winner[0]['winner']
+        ]);
     }
    
 }

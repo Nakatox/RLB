@@ -1,6 +1,3 @@
-/*
- *  Flex Layout Specifics
-*/
 main{
     display:flex;
     flex-direction:row;

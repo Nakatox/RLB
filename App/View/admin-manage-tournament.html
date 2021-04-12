@@ -5,13 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/assets/CSS/admin-manage-tournament.css">
+    <link rel="stylesheet" href="/assets/CSS/admin-manage-tournament2.css">
     <link rel="stylesheet" href="/assets/CSS/reset.css">
     <title>Document</title>
 </head>
 <body>
     {% include 'header.html'%}
 
-    <h1>{{tournament.name}}</h1>
+    <h1 class="title">{{tournament.name}}</h1>
 <main id="tournament">
     {% if tournament.nb_stage == 4 %}
     <form action="/admin/tournament/{{tournament.id}}/manage" method="POST">
@@ -106,7 +107,7 @@
 
             <li class="spacer">&nbsp;</li>
         </ul>
-        <input type="submit" value="comfirm">
+        <input type="submit" value="comfirm" class="button">
 
     </form>
     {% endif %}
@@ -157,7 +158,7 @@
                 </select>
             </li>
             <li class="game game-bottom">{{round3[3]['2']}}</li>
-            <input type="submit" value="comfirm">
+            <input type="submit" value="comfirm" class="button">
         </form>
             <li class="spacer">&nbsp;</li>
         </ul>
@@ -195,7 +196,7 @@
             </li>
             <li class="game game-spacer">&nbsp;</li>
             <li class="game game-bottom">{{round2[1]['2']}}</li>
-            <input type="submit" value="comfirm">
+            <input type="submit" value="comfirm" class="button">
         </form>
         <li class="spacer">&nbsp;</li>
     </ul>
@@ -214,12 +215,12 @@
                 </li>
                 <li class="game game-spacer">&nbsp;</li>
                 <li class="game game-bottom ">{{round1[0]['2']}}</li>
-            <input type="submit" value="comfirm">
+            <input type="submit" value="comfirm" class="button">
 
             </form>	
             <li class="spacer">&nbsp;</li>
         </ul>	
-    
+        <h2 class="winner">{{winner}}</h2>
 </main>
 </body>
 </html>

@@ -136,8 +136,25 @@ public function tournaments()
         return $data;
     }
 
-    
+    public function insertWinner($id,$team){
+        $db = $this->getDb();
+        $stmt = $db->prepare('UPDATE `tournament` SET `winner`=:team WHERE id = :id');
+        $stmt->execute([
+            'id'=>$id,
+            'team'=>$team
+        ]);
+    }
 
+    public function getWinner($id){
+        $db = $this->getDb();
+        $stmt = $db->prepare('SELECT `winner` FROM `tournament` WHERE id = :id');
+        $stmt->execute([
+            'id'=>$id,
+        ]);
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $data;
+    }
+    
 }
 
 ?>

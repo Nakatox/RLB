@@ -1,0 +1,39 @@
+.title{
+    font-size: 30px;
+    margin: 20px;
+}
+.game{
+    margin: 5px;
+    padding: 5px;
+    /* margin-left: 50px; */
+    /* padding-right: 20px; */
+    font-size: 25px;
+    width: 220px;
+}
+.nb{
+    font-size: 20px;
+}
+.round-4{
+    margin-left: 70px;
+}
+.round-3{
+    margin-left: 70px;
+}
+.button{
+    background-color: rgb(68, 68, 246);
+    border-radius: 10px;
+    color: white;
+    border: none;
+    font-size: 25px;
+}
+.winner{
+    font-size: 30px;
+    background-color: rgb(73, 240, 44);
+    border-radius: 10px;
+    color: white;
+    text-align: center;
+    align-self: center;
+    padding: 20px;
+    margin-bottom: 30px;
+    margin-left: 20px;
+}

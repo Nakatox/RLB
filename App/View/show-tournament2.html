@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/CSS/admin-manage-tournament.css">
+    <link rel="stylesheet" href="/assets/CSS/admin-manage-tournament2.css">
+    <link rel="stylesheet" href="/assets/CSS/reset.css">
+    <title>Document</title>
+</head>
+<body>
+    {% include 'header.html'%}
+
+    <h1 class="title">{{tournament.name}}</h1>
+<main id="tournament">
+    {% if tournament.nb_stage == 4 %}
+        <ul class="round round-1">
+            <li class="spacer">&nbsp;</li>
+            
+            <li class="game game-top">{{round4[0]['1']}}</li>
+            <li class="game game-spacer">&nbsp;</li>
+            <li class="game game-bottom ">{{round4[0]['2']}}</li>
+
+            <li class="spacer">&nbsp;</li>
+            
+            <li class="game game-top">{{round4[1]['1']}}</li>
+            <li class="game game-spacer">&nbsp;</li>
+            <li class="game game-bottom ">{{round4[1]['2']}}</li>
+
+            <li class="spacer">&nbsp;</li>
+            
+            <li class="game game-top ">{{round4[2]['1']}}</li>
+            <li class="game game-spacer">&nbsp;</li>
+            <li class="game game-bottom">{{round4[2]['2']}}</li>
+
+            <li class="spacer">&nbsp;</li>
+            
+            <li class="game game-top">{{round4[3]['1']}}</li>
+            <li class="game game-spacer">&nbsp;</li>
+            <li class="game game-bottom ">{{round4[3]['2']}}</li>
+
+            <li class="spacer">&nbsp;</li>
+            
+            <li class="game game-top">{{round4[4]['1']}}</li>
+            <li class="game game-spacer">&nbsp;</li>
+            <li class="game game-bottom ">{{round4[4]['2']}}</li>
+
+            <li class="spacer">&nbsp;</li>
+            
+            <li class="game game-top">{{round4[5]['1']}}</li>
+            <li class="game game-spacer">&nbsp;</li>
+            <li class="game game-bottom ">{{round4[5]['2']}}</li>
+
+            <li class="spacer">&nbsp;</li>
+            
+            <li class="game game-top">{{round4[6]['1']}}</li>
+            <li class="game game-spacer">&nbsp;</li>
+            <li class="game game-bottom ">{{round4[6]['2']}}</li>
+
+            <li class="spacer">&nbsp;</li>
+            
+            <li class="game game-top">{{round4[7]['1']}}</li>
+            <li class="game game-spacer">&nbsp;</li>
+            <li class="game game-bottom ">{{round4[7]['2']}}</li>
+
+            <li class="spacer">&nbsp;</li>
+        </ul>
+    {% endif %}
+
+    {% if tournament.nb_stage >= 3  %}
+    
+        <ul class="round round-2">
+            <li class="spacer">&nbsp;</li>
+            <li class="game game-top">{{round3[0]['1']}} </li>
+            <li class="game game-spacer">&nbsp;</li>
+            <li class="game game-bottom ">{{round3[0]['2']}} </li>
+
+            <li class="spacer">&nbsp;</li>
+            
+            <li class="game game-top">{{round3[1]['1']}} </li>
+            <li class="game game-spacer">&nbsp;</li>
+            <li class="game game-bottom ">{{round3[1]['2']}} </li>
+
+            <li class="spacer">&nbsp;</li>
+            
+            <li class="game game-top ">{{round3[2]['1']}}</li>
+            <li class="game game-spacer">&nbsp;</li>
+            <li class="game game-bottom">{{round3[2]['2']}}</li>
+
+            <li class="spacer">&nbsp;</li>
+            
+            <li class="game game-top ">{{round3[3]['1']}}</li>
+            <li class="game game-spacer">&nbsp;</li>
+            <li class="game game-bottom">{{round3[3]['2']}}</li>
+            <li class="spacer">&nbsp;</li>
+        </ul>
+    
+    {% endif %}
+
+    {% if tournament.nb_stage >= 2 %}
+    
+    <ul class="round round-3">
+        <li class="spacer">&nbsp;</li>
+            <li class="game game-top">{{round2[0]['1']}} </li>
+            <li class="game game-spacer">&nbsp;</li>
+            <li class="game game-spacer">&nbsp;</li>
+            <li class="game game-bottom ">{{round2[0]['2']}}</li>
+
+            <li class="spacer">&nbsp;</li>
+            <li class="spacer">&nbsp;</li>
+            <li class="spacer">&nbsp;</li>
+            <li class="spacer">&nbsp;</li>
+            <li class="spacer">&nbsp;</li>
+
+            
+            <li class="game game-top ">{{round2[1]['1']}}</li>
+            <li class="game game-spacer">&nbsp;</li>
+            <li class="game game-spacer">&nbsp;</li>
+            <li class="game game-bottom">{{round2[1]['2']}}</li>
+        <li class="spacer">&nbsp;</li>
+    </ul>
+    {% endif %}
+        <ul class="round round-4">
+            <li class="spacer">&nbsp;</li>
+                <li class="game game-top">{{round1[0]['1']}}</li>
+                <li class="game game-spacer">&nbsp;</li>
+                <li class="game game-spacer">&nbsp;</li>
+                <li class="game game-spacer">&nbsp;</li>
+                <li class="game game-bottom ">{{round1[0]['2']}}</li>
+            <li class="spacer">&nbsp;</li>
+        </ul>	
+        <h2 class="winner">{{winner}}</h2>
+</main>
+</body>
+</html>

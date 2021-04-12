@@ -28,7 +28,7 @@
   <tbody>
    {% for tournament in tournaments %}
     <tr>
-      <th scope="row"> <a href="/tournament/{{tournament.id}}"> {{ tournament.name }}</a></th>
+      <th scope="row"> <a href="/admin/tournament/{{ tournament.id }}/show"> {{ tournament.name }}</a></th>
       
       <td>  {{ tournament.date }} </td>
       
