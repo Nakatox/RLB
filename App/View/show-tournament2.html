@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/CSS/show-tournament.css">
     <link rel="stylesheet" href="/assets/CSS/admin-manage-tournament.css">
     <link rel="stylesheet" href="/assets/CSS/admin-manage-tournament2.css">
     <link rel="stylesheet" href="/assets/CSS/reset.css">
@@ -77,6 +78,7 @@
             <li class="game game-bottom ">{{round3[0]['2']}} </li>
 
             <li class="spacer">&nbsp;</li>
+            <li class="spacer">&nbsp;</li>
             
             <li class="game game-top">{{round3[1]['1']}} </li>
             <li class="game game-spacer">&nbsp;</li>
@@ -102,13 +104,12 @@
     
     <ul class="round round-3">
         <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
             <li class="game game-top">{{round2[0]['1']}} </li>
             <li class="game game-spacer">&nbsp;</li>
             <li class="game game-spacer">&nbsp;</li>
             <li class="game game-bottom ">{{round2[0]['2']}}</li>
 
-            <li class="spacer">&nbsp;</li>
-            <li class="spacer">&nbsp;</li>
             <li class="spacer">&nbsp;</li>
             <li class="spacer">&nbsp;</li>
             <li class="spacer">&nbsp;</li>
@@ -119,18 +120,24 @@
             <li class="game game-spacer">&nbsp;</li>
             <li class="game game-bottom">{{round2[1]['2']}}</li>
         <li class="spacer">&nbsp;</li>
+        <li class="spacer">&nbsp;</li>
     </ul>
     {% endif %}
         <ul class="round round-4">
             <li class="spacer">&nbsp;</li>
                 <li class="game game-top">{{round1[0]['1']}}</li>
                 <li class="game game-spacer">&nbsp;</li>
-                <li class="game game-spacer">&nbsp;</li>
-                <li class="game game-spacer">&nbsp;</li>
+                {# <li class="game game-spacer">&nbsp;</li> #}
+                {# <li class="game game-spacer">&nbsp;</li> #}
                 <li class="game game-bottom ">{{round1[0]['2']}}</li>
             <li class="spacer">&nbsp;</li>
         </ul>	
+        {% if winner != "" %}
         <h2 class="winner">{{winner}}</h2>
+        {% else %}
+        <h2 class="progress">In progress...</h2>
+
+        {% endif %}
 </main>
 </body>
 </html>

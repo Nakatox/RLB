@@ -46,17 +46,21 @@ class TournamentController extends Controller{
             
             
     }
+
    
 
     public function createTournament():void{
+
+        function array_has_dupes($array) {
+            return count($array) !== count(array_unique($array));
+         }
         if($_SESSION['id']!=""){
             $tournament = new TournamentModel();
             $team = new TeamModel();
             $teams = $team->getTeam();
             $stage = new StageModel();
-        
-            if(!empty($_POST["name"]) && strlen($_POST['name']) > 4 && strlen($_POST['name']) < 100 && !empty($_POST["teamChosen"])){
-                //les équipes font du 1v1 donc ondivise le nombre de participant par deux pour avoir le tot d'étapes 
+            $date = Date('Y-m-d');
+            if(!empty($_POST["date"]) && $_POST["date"] > $date && !empty($_POST["name"]) && strlen($_POST['name']) > 4 && strlen($_POST['name']) < 100 && !empty($_POST["teamChosen"]) && !array_has_dupes($_POST["teamChosen"])){
                 $nb_stage = count($_POST["teamChosen"])/2;
                 $number_of_stage = 0;
                 if(count($_POST["teamChosen"]) == 16){
@@ -101,6 +105,7 @@ class TournamentController extends Controller{
                     }
                     $allteamsId = array_values($allteamsId);
                 }
+                header('Location:/admin/tournament/'.$id_tournament[0]['id'].'/manage');
             }
             $this->renderTemplate('admin-createTournament.html',[
                 'teams'=>$teams,
@@ -159,9 +164,16 @@ class TournamentController extends Controller{
     public function deleteTournamentById(int $id):void{
         if($_SESSION['id']!=""){
             $tournamentsModel = new TournamentModel();
+            $stageModel = new StageModel();
+            $stages = $stageModel->getAllStageByTournament($id);
+            foreach($stages as $key => $value){
+                $stageModel->deleteRounds($stages[$key]['id']);
+            }
+            $stageModel->deleteStages($id);
             $tournamentsModel->deleteTournamentHasTeam($id);
             $tournamentsModel->deleteClassement($id);
             $tournamentsModel->deleteTournamentById($id);
+            
             header('Location:/admin/tournament/list');
         }else{
             http_response_code(404);
@@ -241,6 +253,8 @@ class TournamentController extends Controller{
                     }
                     $allteamsId = array_values($allteamsId);
                 }
+                header('Location:/admin/tournament/'.$id.'/manage');
+
             }
             if(isset($_POST['round3-1'])){
                 $stage->insertStage($id,2);
@@ -254,6 +268,8 @@ class TournamentController extends Controller{
                     }
                     $allteamsId = array_values($allteamsId);
                 }
+                header('Location:/admin/tournament/'.$id.'/manage');
+
             }
             if(isset($_POST['round2-1'])){
                 $stage->insertStage($id,1);
@@ -267,11 +283,27 @@ class TournamentController extends Controller{
                     }
                     $allteamsId = array_values($allteamsId);
                 }
+                header('Location:/admin/tournament/'.$id.'/manage');
+
             }
 
             if(isset($_POST['round1-1'])){
                 $idTeam = $teamModel->getTeamByName2($_POST['round1-1']);
                 $tournamentModel->insertWinner($id, $teamModel->getNameTeamById($idTeam['id']));
+                header('Location:/admin/tournament/'.$id.'/manage');
+            }
+            $state = 4;
+            if($stage4[0]['1'] != ""){
+                $state = 4;
+            }
+            if($stage3[0]['1'] != ""){
+                $state = 3;
+            }
+            if($stage2[0]['1'] != ""){
+                $state = 2;
+            }
+            if($stage1[0]['1'] != ""){
+                $state = 1;
             }
             $winner = $tournamentModel->getWinner($id);
             $this->renderTemplate('admin-manage-tournament.html',[
@@ -281,7 +313,8 @@ class TournamentController extends Controller{
                 'round3'=>$stage3,
                 'round2'=>$stage2,
                 'round1'=>$stage1,
-                'winner'=>$winner[0]['winner']
+                'winner'=>$winner[0]['winner'],
+                'state'=>$state
             ]);
         }else{
             http_response_code(404);
@@ -360,3 +393,5 @@ class TournamentController extends Controller{
     }
    
 }
+
+//36544

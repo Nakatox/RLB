@@ -54,4 +54,18 @@ class StageModel extends Model{
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function deleteRounds(int $id):void{
+        $db = $this->getDb();
+        $query = $db->prepare('DELETE FROM `round` WHERE stage_id = :id');
+        $query->execute( [
+            'id' => $id,
+        ]);
+    }
+    public function deleteStages(int $id):void{
+        $db = $this->getDb();
+        $query = $db->prepare('DELETE FROM `stage` WHERE tournament_id = :id');
+        $query->execute( [
+            'id' => $id,
+        ]);
+    }
 }

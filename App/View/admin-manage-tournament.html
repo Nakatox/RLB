@@ -9,9 +9,14 @@
     <link rel="stylesheet" href="/assets/CSS/reset.css">
     <title>Document</title>
 </head>
+<style>
+    .state{
+        visibility: hidden;
+    }
+</style>
 <body>
     {% include 'header.html'%}
-
+<p class="state">{{state}}</p>
     <h1 class="title">{{tournament.name}}</h1>
 <main id="tournament">
     {% if tournament.nb_stage == 4 %}
@@ -20,8 +25,8 @@
             <li class="spacer">&nbsp;</li>
             
             <li class="game game-top">{{round4[0]['1']}}</li>
-            <li class="game game-spacer">
-                <select class="nb" name="round4-1">
+            <li class="game game-spacer round4_values">
+                <select class="nb" name="round4-1" class="round4_values">
                     <option value="{{round4[0]['1']}}">{{round4[0]['1']}}</option>
                     <option value="{{round4[0]['2']}}">{{round4[0]['2']}}</option>
                 </select>
@@ -31,8 +36,8 @@
             <li class="spacer">&nbsp;</li>
             
             <li class="game game-top">{{round4[1]['1']}}</li>
-            <li class="game game-spacer">
-                <select class="nb" name="round4-2">
+            <li class="game game-spacer round4_values">
+                <select class="nb" name="round4-2" class="round4_values">
                     <option value="{{round4[1]['1']}}">{{round4[1]['1']}}</option>
                     <option value="{{round4[1]['2']}}">{{round4[1]['2']}}</option>
                 </select>
@@ -42,8 +47,8 @@
             <li class="spacer">&nbsp;</li>
             
             <li class="game game-top ">{{round4[2]['1']}}</li>
-            <li class="game game-spacer">
-                <select class="nb" name="round4-3">
+            <li class="game game-spacer round4_values">
+                <select class="nb" name="round4-3" class="round4_values">
                     <option value="{{round4[2]['1']}}">{{round4[2]['1']}}</option>
                     <option value="{{round4[2]['2']}}">{{round4[2]['2']}}</option>
                 </select>
@@ -53,8 +58,8 @@
             <li class="spacer">&nbsp;</li>
             
             <li class="game game-top">{{round4[3]['1']}}</li>
-            <li class="game game-spacer">
-                <select class="nb" name="round4-4">
+            <li class="game game-spacer round4_values">
+                <select class="nb" name="round4-4" class="round4_values">
                     <option value="{{round4[3]['1']}}">{{round4[3]['1']}}</option>
                     <option value="{{round4[3]['2']}}">{{round4[3]['2']}}</option>
                 </select>
@@ -64,8 +69,8 @@
             <li class="spacer">&nbsp;</li>
             
             <li class="game game-top">{{round4[4]['1']}}</li>
-            <li class="game game-spacer">
-                <select class="nb" name="round4-5">
+            <li class="game game-spacer round4_values">
+                <select class="nb" name="round4-5" class="round4_values">
                     <option value="{{round4[4]['1']}}">{{round4[4]['1']}}</option>
                     <option value="{{round4[4]['2']}}">{{round4[4]['2']}}</option>
                 </select>
@@ -75,8 +80,8 @@
             <li class="spacer">&nbsp;</li>
             
             <li class="game game-top">{{round4[5]['1']}}</li>
-            <li class="game game-spacer">
-                <select class="nb" name="round4-6">
+            <li class="game game-spacer round4_values">
+                <select class="nb" name="round4-6" class="round4_values">
                     <option value="{{round4[5]['1']}}">{{round4[5]['1']}}</option>
                     <option value="{{round4[5]['2']}}">{{round4[5]['2']}}</option>
                 </select>
@@ -86,8 +91,8 @@
             <li class="spacer">&nbsp;</li>
             
             <li class="game game-top">{{round4[6]['1']}}</li>
-            <li class="game game-spacer">
-                <select class="nb" name="round4-7">
+            <li class="game game-spacer round4_values">
+                <select class="nb" name="round4-7" class="round4_values">
                     <option value="{{round4[6]['1']}}">{{round4[6]['1']}}</option>
                     <option value="{{round4[6]['2']}}">{{round4[6]['2']}}</option>
                 </select>
@@ -97,8 +102,8 @@
             <li class="spacer">&nbsp;</li>
             
             <li class="game game-top">{{round4[7]['1']}}</li>
-            <li class="game game-spacer">
-                <select class="nb" name="round4-8">
+            <li class="game game-spacer round4_values">
+                <select class="nb" name="round4-8" class="round4_values">
                     <option value="{{round4[7]['1']}}">{{round4[7]['1']}}</option>
                     <option value="{{round4[7]['2']}}">{{round4[7]['2']}}</option>
                 </select>
@@ -107,7 +112,7 @@
 
             <li class="spacer">&nbsp;</li>
         </ul>
-        <input type="submit" value="comfirm" class="button">
+        <input type="submit" value="comfirm" class="button round4_values">
 
     </form>
     {% endif %}
@@ -118,8 +123,9 @@
             <li class="spacer">&nbsp;</li>
             <form action="/admin/tournament/{{tournament.id}}/manage" method="POST">
             <li class="game game-top">{{round3[0]['1']}} </li>
-            <li class="game game-spacer">
-                <select class="nb" name="round3-1">
+
+            <li class="game game-spacer round3_values">
+                <select class="nb" name="round3-1" class="round3_values">
                     <option value="{{round3[0]['1']}}">{{round3[0]['1']}}</option>
                     <option value="{{round3[0]['2']}}">{{round3[0]['2']}}</option>
                 </select>
@@ -129,8 +135,8 @@
             <li class="spacer">&nbsp;</li>
             
             <li class="game game-top">{{round3[1]['1']}} </li>
-            <li class="game game-spacer">
-                <select class="nb" name="round3-2">
+            <li class="game game-spacer round3_values">
+                <select class="nb" name="round3-2" class="round3_values">
                     <option value="{{round3[1]['1']}}">{{round3[1]['1']}}</option>
                     <option value="{{round3[1]['2']}}">{{round3[1]['2']}}</option>
                 </select>
@@ -140,8 +146,8 @@
             <li class="spacer">&nbsp;</li>
             
             <li class="game game-top ">{{round3[2]['1']}}</li>
-            <li class="game game-spacer">
-                <select class="nb" name="round3-3">
+            <li class="game game-spacer round3_values">
+                <select class="nb" name="round3-3" class="round3_values">
                     <option value="{{round3[2]['1']}}">{{round3[2]['1']}}</option>
                     <option value="{{round3[2]['2']}}">{{round3[2]['2']}}</option>
                 </select>
@@ -151,14 +157,14 @@
             <li class="spacer">&nbsp;</li>
             
             <li class="game game-top ">{{round3[3]['1']}}</li>
-            <li class="game game-spacer">
-                <select class="nb" name="round3-4">
+            <li class="game game-spacer round3_values">
+                <select class="nb" name="round3-4" class="round3_values">
                     <option value="{{round3[3]['1']}}">{{round3[3]['1']}}</option>
                     <option value="{{round3[3]['2']}}">{{round3[3]['2']}}</option>
                 </select>
             </li>
             <li class="game game-bottom">{{round3[3]['2']}}</li>
-            <input type="submit" value="comfirm" class="button">
+            <input type="submit" value="comfirm" class="button round3_values">
         </form>
             <li class="spacer">&nbsp;</li>
         </ul>
@@ -171,8 +177,8 @@
         <li class="spacer">&nbsp;</li>
         <form action="/admin/tournament/{{tournament.id}}/manage" method="POST">
             <li class="game game-top">{{round2[0]['1']}} </li>
-            <li class="game game-spacer">
-                <select class="nb" name="round2-1">
+            <li class="game game-spacer round2_values">
+                <select class="nb" name="round2-1" class="round2_values">
                     <option value="{{round2[0]['1']}}">{{round2[0]['1']}}</option>
                     <option value="{{round2[0]['2']}}">{{round2[0]['2']}}</option>
                 </select>
@@ -188,15 +194,15 @@
 
             
             <li class="game game-top ">{{round2[1]['1']}}</li>
-            <li class="game game-spacer">
-                <select class="nb" name="round2-2">
+            <li class="game game-spacer round2_values">
+                <select class="nb" name="round2-2" class="round2_values">
                     <option value="{{round2[1]['1']}}">{{round2[1]['1']}}</option>
                     <option value="{{round2[1]['2']}}">{{round2[1]['2']}}</option>
                 </select>
             </li>
             <li class="game game-spacer">&nbsp;</li>
             <li class="game game-bottom">{{round2[1]['2']}}</li>
-            <input type="submit" value="comfirm" class="button">
+            <input type="submit" value="comfirm" class="button round2_values">
         </form>
         <li class="spacer">&nbsp;</li>
     </ul>
@@ -207,20 +213,103 @@
             <form action="/admin/tournament/{{tournament.id}}/manage" method="POST">
                 <li class="game game-top">{{round1[0]['1']}}</li>
                 <li class="game game-spacer">&nbsp;</li>
-                <li class="game game-spacer">
-                    <select class="nb" name="round1-1">
+                <li class="game game-spacer round1_values">
+                    <select class="nb" name="round1-1" class="round1_values">
                         <option value="{{round1[0]['1']}}">{{round1[0]['1']}}</option>
                         <option value="{{round1[0]['2']}}">{{round1[0]['2']}}</option>
                     </select>
                 </li>
                 <li class="game game-spacer">&nbsp;</li>
                 <li class="game game-bottom ">{{round1[0]['2']}}</li>
-            <input type="submit" value="comfirm" class="button">
+            <input type="submit" value="comfirm" class="button round1_values">
 
             </form>	
             <li class="spacer">&nbsp;</li>
         </ul>	
+        {% if winner != "" %}
         <h2 class="winner">{{winner}}</h2>
+
+        {% else %}
+        <h2 class="progress">In progress...</h2>
+
+        {% endif %}
 </main>
 </body>
+<script>
+    let state = document.querySelector('.state').textContent
+    let round1_values = document.querySelectorAll('.round1_values')
+    let round2_values = document.querySelectorAll('.round2_values')
+    let round3_values = document.querySelectorAll('.round3_values')
+    let round4_values = document.querySelectorAll('.round4_values')
+    let winnerCheck = document.querySelector('.winner')
+
+    if(state == 4){
+        round1_values.forEach((index)=>{
+            index.style.visibility ='hidden'
+        })
+        round2_values.forEach((index)=>{
+            index.style.visibility ='hidden'
+        })
+        round3_values.forEach((index)=>{
+            index.style.visibility ='hidden'
+        })
+        round4_values.forEach((index)=>{
+            index.style.visibility ='visible'
+        })
+    }else if(state == 3){
+        round1_values.forEach((index)=>{
+            index.style.visibility ='hidden'
+        })
+        round2_values.forEach((index)=>{
+            index.style.visibility ='hidden'
+        })
+        round3_values.forEach((index)=>{
+            index.style.visibility ='visible'
+        })
+        round4_values.forEach((index)=>{
+            index.style.visibility ='hidden'
+        })
+    }else if(state == 2){
+        round1_values.forEach((index)=>{
+            index.style.visibility ='hidden'
+        })
+        round3_values.forEach((index)=>{
+            index.style.visibility ='hidden'
+        })
+        round4_values.forEach((index)=>{
+            index.style.visibility ='hidden'
+        })
+        round2_values.forEach((index)=>{
+            index.style.visibility ='visibile'
+        })
+    }else if(state == 1){
+        round1_values.forEach((index)=>{
+            index.style.visibility ='visible'
+        })
+        round3_values.forEach((index)=>{
+            index.style.visibility ='hidden'
+        })
+        round4_values.forEach((index)=>{
+            index.style.visibility ='hidden'
+        })
+        round2_values.forEach((index)=>{
+            index.style.visibility ='hidden'
+        })
+    }
+    if(winnerCheck.textContent != ""){
+        round1_values.forEach((index)=>{
+            index.style.visibility ='hidden'
+        })
+        round3_values.forEach((index)=>{
+            index.style.visibility ='hidden'
+        })
+        round4_values.forEach((index)=>{
+            index.style.visibility ='hidden'
+        })
+        round2_values.forEach((index)=>{
+            index.style.visibility ='hidden'
+        })
+    }
+
+</script>
 </html>

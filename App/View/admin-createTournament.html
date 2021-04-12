@@ -21,23 +21,27 @@
         <form action="/admin/tournament/create" method="POST" class="form">
             <p class="chooseTitle">Choose a name for your tournament</p><input type="text" placeholder="name" name="name" class="nameinput">
             <br>
+            <p class="chooseBold">Date : <input type="date" name="date"></p>
+            <br>
             <p class="choose chooseBold">Choose Teams :</p>
             
             <div class="equipe">
                 
             </div>
             <p class="choose">How many teams :</p>
+            
                 <input type="submit" value="Create tournament" class="create">
-        </form>
+            </form>
 
         <form action="" class="nb_teams">
             <select class="nb">
                 <option value="2">2 teams</option>
                 <option value="4">4 teams</option>
-                <option value="6">6 teams</option>
                 <option value="8">8 teams</option>
+                <option value="16">16 teams</option>
             </select>
             <input type="submit" value="Valid" class="create2">
+
         </form> 
         
         {% for value in teams %}
